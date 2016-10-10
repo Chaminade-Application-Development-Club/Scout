@@ -1,86 +1,49 @@
 package com.example.huzheyuan.scout;
+import android.os.Bundle;
+import android.view.MotionEvent;
+import android.view.View;
+import android.view.View.OnTouchListener;
+import android.widget.FrameLayout;
+import android.app.Activity;
+import android.widget.TextView;
 
 
-        import android.support.v7.app.AppCompatActivity;
-        import android.os.Bundle;
-        import android.view.View;
-        import android.widget.Button;
-        import android.widget.TextView;
+public class MainActivity extends Activity {
 
-
-public class MainActivity extends AppCompatActivity
-{
-    Button btnPlus;
-    Button btnMinus;
-    Button btnClear;
-    TextView scoreText;
-    public int totalScores = 0;
-
+    String strCX;
+    String strCY;
+    TextView cX ;
+    TextView cY ;
     @Override
-    protected void onCreate(Bundle savedInstanceState)
-    {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        findElements();
-        countScores();
-        clearData();
+        cX = (TextView) findViewById(R.id.coordinateX);
+        cY = (TextView) findViewById(R.id.coordinateY);
 
-    }
-
-    public void findElements()
-    {
-        btnPlus = (Button) findViewById(R.id.btnPlus1);
-        btnMinus = (Button) findViewById(R.id.btnMinus1);
-        btnClear = (Button) findViewById(R.id.btnClear1);
-        scoreText = (TextView) findViewById(R.id.scoreText1);
-    }
-
-    public void countScores()
-    {
-        View.OnClickListener oclBtnPlus = new View.OnClickListener()
-        {
+        FrameLayout frame = (FrameLayout) findViewById(R.id.mylayout);
+        final GirlView mezi = new GirlView(MainActivity.this);
+        //为我们的萌妹子添加触摸事件监听器
+        mezi.setOnTouchListener(new OnTouchListener() {
             @Override
-            public void onClick(View v)
-            {
-                totalScores++;
-                String totalScoresString = Integer.toString(totalScores);
-                scoreText.setText(totalScoresString);
+            public boolean onTouch(View view, MotionEvent event) {
+                //设置妹子显示的位置
+                mezi.bitmapX = event.getX() - 150;
+                mezi.bitmapY = event.getY() - 150;
+                //调用重绘方法
+                mezi.invalidate();
+
+                strCX = Float.toString(mezi.bitmapX);
+                strCY = Float.toString(mezi.bitmapY);
+
+
+                cX.setText("x-axis: " + strCX);
+                cY.setText("y-axis: " + strCY);
+
+                return true;
             }
-        };
-        btnPlus.setOnClickListener(oclBtnPlus);
-
-        View.OnClickListener oclBtnMinus = new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View v)
-            {
-                totalScores--;
-                if(totalScores < 0)
-                {
-                    totalScores = 0;
-                }
-
-                String totalScoresString = Integer.toString(totalScores);
-                scoreText.setText(totalScoresString);
-            }
-
-        };
-        btnMinus.setOnClickListener(oclBtnMinus);
-    }
-
-    public void clearData()
-    {
-        View.OnClickListener oclBtnClear = new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View v)
-            {
-                totalScores = 0;
-                String totalScoresString = Integer.toString(totalScores);
-                scoreText.setText(totalScoresString);
-            }
-        };
-        btnClear.setOnClickListener(oclBtnClear);
+        });
+        frame.addView(mezi);
     }
 }
