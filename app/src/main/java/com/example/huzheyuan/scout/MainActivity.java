@@ -3,39 +3,66 @@ import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnTouchListener;
+import android.widget.Button;
 import android.widget.FrameLayout;
 import android.app.Activity;
 import android.widget.TextView;
 
 
-public class MainActivity extends Activity {
+public class MainActivity extends Activity
+{
+
+    TextView cX ;
+    TextView cY ;
+    Button bClear;
 
     String strCX;
     String strCY;
-    TextView cX ;
-    TextView cY ;
+
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
         cX = (TextView) findViewById(R.id.coordinateX);
         cY = (TextView) findViewById(R.id.coordinateY);
+        bClear = (Button) findViewById(R.id.btnClear);
 
         FrameLayout frame = (FrameLayout) findViewById(R.id.mylayout);
-        final GirlView mezi = new GirlView(MainActivity.this);
+        final GirlView girl = new GirlView(MainActivity.this);
         //为我们的萌妹子添加触摸事件监听器
-        mezi.setOnTouchListener(new OnTouchListener() {
+        girl.setOnTouchListener(new OnTouchListener()
+        {
             @Override
-            public boolean onTouch(View view, MotionEvent event) {
-                //设置妹子显示的位置
-                mezi.bitmapX = event.getX() - 150;
-                mezi.bitmapY = event.getY() - 150;
-                //调用重绘方法
-                mezi.invalidate();
+            public boolean onTouch(View view, MotionEvent event)
+            {
+                bClear.setOnClickListener(new View.OnClickListener()
+                {
+                    @Override
+                    public void onClick(View v)
+                    {
+                        girl.bitmapX = 0;
+                        girl.bitmapY = 0;
 
-                strCX = Float.toString(mezi.bitmapX);
-                strCY = Float.toString(mezi.bitmapY);
+                        girl.invalidate();
+
+                        strCX = Float.toString(girl.bitmapX);
+                        strCY = Float.toString(girl.bitmapY);
+
+                        cX.setText("x-axis: " + strCX);
+                        cY.setText("y-axis: " + strCY);
+                    }
+                });
+
+                //设置妹子显示的位置
+                girl.bitmapX = event.getX() - 150;
+                girl.bitmapY = event.getY() - 150;
+                //调用重绘方法
+                girl.invalidate();
+
+                strCX = Float.toString(girl.bitmapX);
+                strCY = Float.toString(girl.bitmapY);
 
 
                 cX.setText("x-axis: " + strCX);
@@ -44,6 +71,8 @@ public class MainActivity extends Activity {
                 return true;
             }
         });
-        frame.addView(mezi);
+
+
+        frame.addView(girl);
     }
 }
