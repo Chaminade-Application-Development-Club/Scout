@@ -56,13 +56,13 @@ public class MainActivity extends Activity
                 });
 
                 //设置妹子显示的位置
-                girl.bitmapX = event.getX() - 150;
-                girl.bitmapY = event.getY() - 150;
+                girl.bitmapX = event.getX() -75;
+                girl.bitmapY = event.getY() -90;
                 //调用重绘方法
                 girl.invalidate();
 
-                strCX = Float.toString(girl.bitmapX);
-                strCY = Float.toString(girl.bitmapY);
+                strCX = Float.toString(event.getX());
+                strCY = Float.toString(event.getY());
 
 
                 cX.setText("x-axis: " + strCX);
