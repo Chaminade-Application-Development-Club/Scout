@@ -26,7 +26,7 @@ public class GirlView extends View {
         //创建,并且实例化Paint的对象
         Paint paint = new Paint();
         //根据图片生成位图对象
-        Bitmap bitmap = BitmapFactory.decodeResource(this.getResources(), R.mipmap.girl);
+        Bitmap bitmap = BitmapFactory.decodeResource(this.getResources(), R.mipmap.sgril);
         //绘制萌妹子
         canvas.drawBitmap(bitmap, bitmapX, bitmapY,paint);
         //判断图片是否回收,木有回收的话强制收回图片
