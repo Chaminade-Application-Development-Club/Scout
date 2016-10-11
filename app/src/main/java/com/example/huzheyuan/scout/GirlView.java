@@ -8,11 +8,13 @@ package com.example.huzheyuan.scout;
         import android.graphics.Paint;
         import android.view.View;
 
-public class GirlView extends View {
+public class GirlView extends View
+{
     //定义相关变量,依次是妹子显示位置的X,Y坐标
     public float bitmapX;
     public float bitmapY;
-    public GirlView(Context context) {
+    public GirlView(Context context)
+    {
         super(context);
         //设置妹子的起始坐标
         bitmapX = 0;
@@ -21,7 +23,8 @@ public class GirlView extends View {
 
     //重写View类的onDraw()方法
     @Override
-    protected void onDraw(Canvas canvas) {
+    protected void onDraw(Canvas canvas)
+    {
         super.onDraw(canvas);
         //创建,并且实例化Paint的对象
         Paint paint = new Paint();
