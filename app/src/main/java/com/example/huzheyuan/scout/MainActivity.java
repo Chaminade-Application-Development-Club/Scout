@@ -50,8 +50,8 @@ public class MainActivity extends Activity {
             @Override
             public void onClick(View v) {
 
-                girl.bitmapX = 138;
-                girl.bitmapY = 175;
+                girl.bitmapX = 15;
+                girl.bitmapY = 110;
                 girl.invalidate();
 
                 strCX = Float.toString(girl.bitmapX);
@@ -70,22 +70,23 @@ public class MainActivity extends Activity {
                                 girl.bitmapX = event.getX() - 36;
                                 girl.bitmapY = event.getY() - 44;
 
-                                if(girl.bitmapX < 170 -36)
+                                if(girl.bitmapX < 0 )
                                 {
-                                    girl.bitmapX = 170 -36;
+                                    girl.bitmapX = 0 ;
                                 }
-                                else if(girl.bitmapX > 275)
+                                else if(girl.bitmapX > 240)
                                 {
-                                    girl.bitmapX = 275;
+                                    girl.bitmapX = 240;
                                 }
-                                if(girl.bitmapY < 150 - 44)
+                                if(girl.bitmapY < 0)
                                 {
-                                    girl.bitmapY = 150 -44;
+                                    girl.bitmapY = 0;
                                 }
-                                else if(girl.bitmapY > 480 - 44)
+                                else if(girl.bitmapY > 520)
                                 {
-                                    girl.bitmapY = 480 - 44;
+                                    girl.bitmapY = 520;
                                 }
+
 
                                 //调用重绘方法
                                 girl.invalidate();
@@ -103,9 +104,14 @@ public class MainActivity extends Activity {
                     public void onFinish()
                     {
                         cT.setText("done!");
-                        girl.bitmapX = 138;
-                        girl.bitmapY = 175;
+                        girl.bitmapX = 15;
+                        girl.bitmapY = 110;
                         girl.invalidate();
+
+                        strCX = Float.toString(girl.bitmapX);
+                        strCY = Float.toString(girl.bitmapY);
+                        cX.setText("x-axis: " + strCX);
+                        cY.setText("y-axis: " + strCY);
                     }
                 }.start();
             }
