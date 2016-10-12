@@ -1,6 +1,5 @@
 package com.example.huzheyuan.scout;
 
-
         import android.content.Context;
         import android.graphics.Bitmap;
         import android.graphics.BitmapFactory;
@@ -17,8 +16,8 @@ public class GirlView extends View
     {
         super(context);
         //设置妹子的起始坐标
-        bitmapX = 0;
-        bitmapY = 0;
+        bitmapX = 138;
+        bitmapY = 175;
     }
 
     //重写View类的onDraw()方法
