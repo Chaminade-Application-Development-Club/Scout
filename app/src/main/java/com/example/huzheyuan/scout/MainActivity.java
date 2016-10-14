@@ -172,6 +172,51 @@ public class MainActivity extends Activity
         bAuto.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if(leftSide == true && up == true) {
+                    girl.bitmapX = 15;
+                    girl.bitmapY = 110;
+
+                    girl.invalidate();
+
+                    strCX = Float.toString(girl.bitmapX);
+                    strCY = Float.toString(girl.bitmapY);
+                    cX.setText("x-axis: " + strCX);
+                    cY.setText("y-axis: " + strCY);
+                }
+
+                else if(leftSide == true && up == false){
+                    girl.bitmapX = 15;
+                    girl.bitmapY = 410;
+                    girl.invalidate();
+
+                    strCX = Float.toString(girl.bitmapX);
+                    strCY = Float.toString(girl.bitmapY);
+                    cX.setText("x-axis: " + strCX);
+                    cY.setText("y-axis: " + strCY);
+                }
+
+                else if(leftSide == false && up == true){
+                    girl.bitmapX = 510;
+                    girl.bitmapY = 110;
+                    girl.invalidate();
+
+                    strCX = Float.toString(girl.bitmapX);
+                    strCY = Float.toString(girl.bitmapY);
+                    cX.setText("x-axis: " + strCX);
+                    cY.setText("y-axis: " + strCY);
+                }
+
+                else if(leftSide == false && up == false){
+                    girl.bitmapX = 510;
+                    girl.bitmapY = 410;
+                    girl.invalidate();
+
+                    strCX = Float.toString(girl.bitmapX);
+                    strCY = Float.toString(girl.bitmapY);
+                    cX.setText("x-axis: " + strCX);
+                    cY.setText("y-axis: " + strCY);
+                }
+
                 new CountDownTimer(15000, 1000) {
                     // Auto time limits 15s
                     public void onTick(long millisUntilFinished) {
@@ -291,6 +336,51 @@ public class MainActivity extends Activity
         bDriver.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if(leftSide == true && up == true) {
+                    girl.bitmapX = 15;
+                    girl.bitmapY = 110;
+
+                    girl.invalidate();
+
+                    strCX = Float.toString(girl.bitmapX);
+                    strCY = Float.toString(girl.bitmapY);
+                    cX.setText("x-axis: " + strCX);
+                    cY.setText("y-axis: " + strCY);
+                }
+
+                else if(leftSide == true && up == false){
+                    girl.bitmapX = 15;
+                    girl.bitmapY = 410;
+                    girl.invalidate();
+
+                    strCX = Float.toString(girl.bitmapX);
+                    strCY = Float.toString(girl.bitmapY);
+                    cX.setText("x-axis: " + strCX);
+                    cY.setText("y-axis: " + strCY);
+                }
+
+                else if(leftSide == false && up == true){
+                    girl.bitmapX = 510;
+                    girl.bitmapY = 110;
+                    girl.invalidate();
+
+                    strCX = Float.toString(girl.bitmapX);
+                    strCY = Float.toString(girl.bitmapY);
+                    cX.setText("x-axis: " + strCX);
+                    cY.setText("y-axis: " + strCY);
+                }
+
+                else if(leftSide == false && up == false){
+                    girl.bitmapX = 510;
+                    girl.bitmapY = 410;
+                    girl.invalidate();
+
+                    strCX = Float.toString(girl.bitmapX);
+                    strCY = Float.toString(girl.bitmapY);
+                    cX.setText("x-axis: " + strCX);
+                    cY.setText("y-axis: " + strCY);
+                }
+
                 new CountDownTimer(150000, 1000) {
                     // driving portion is 1:45 min
                     public void onTick(long millisUntilFinished) {
