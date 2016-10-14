@@ -3,37 +3,6 @@
     android:layout_width="wrap_content"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <TextView
-        android:id = "@+id/countDown"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:text="Please Start"
-        android:padding="10dp"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        />
-
-    <TextView
-        android:id = "@+id/coordinateX"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:padding="10dp"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text = "x-axis:"
-        android:layout_alignParentLeft="false" />
-
-    <TextView
-        android:id = "@+id/coordinateY"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:padding="10dp"
-        android:gravity="center"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text = "y-axis:"
-        android:layout_alignParentRight="false"
-        android:layout_below="@+id/coordinateX" />
-
     <RelativeLayout
         android:id="@+id/fieldLayout"
         android:layout_width="match_parent"
@@ -52,13 +21,99 @@
 
     </RelativeLayout>
 
-    <Button
-        android:id="@+id/btnClear"
+    <TextView
+        android:id = "@+id/countDown"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text = "Reset"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:text="Please Start"
+        android:padding="10dp"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        />
+
+
+    <Spinner
+        android:id = "@+id/spinTeamNum"
+        android:layout_width="210dp"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:entries="@array/data"
+        android:gravity="center"
+        android:dropDownSelector="@color/colorPrimary">
+
+    </Spinner>
+
+    <Switch
+        android:id = "@+id/stchSide"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/countDown"
+        android:background="@null"
+        android:hint="Swith Sides"
+        android:textOff="Left"
+        android:textOn="Right"
+        android:textColorHint="#01579B"
+        />
+
+    <Switch
+        android:id = "@+id/stchPoint"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/stchSide"
+        android:hint="Swith Start Point"
+        android:textOff="Up"
+        android:textOn="Down"
+        android:textColorHint="#01579B"
+        />
+
+    <Button
+        android:id="@+id/btnAuto"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text = "Auto"
+        android:textAppearance="?android:attr/textAppearanceMedium"
         android:textAllCaps="false"
         android:layout_alignParentTop="true"
-        android:layout_alignParentRight="true" />
+        android:layout_alignParentRight="true"
+        android:background="@null"
+        android:textColor="#01579B"
+        />
+
+    <Button
+        android:id="@+id/btnDrive"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text = "Driver"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textAllCaps="false"
+        android:layout_below="@+id/btnAuto"
+        android:layout_alignParentRight="true"
+        android:background="@null"
+        android:textColor="#01579B"
+        />
+
+    <TextView
+        android:id = "@+id/coordinateY"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="5dp"
+        android:gravity="center"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text = "y-axis:"
+        android:layout_above="@+id/fieldLayout"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:id = "@+id/coordinateX"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="5dp"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text = "x-axis:"
+        android:layout_above="@+id/coordinateY"
+        android:layout_alignParentStart="true" />
 
 </RelativeLayout>

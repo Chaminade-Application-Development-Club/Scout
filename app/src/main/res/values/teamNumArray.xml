@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="data">
+        <item>Select team number</item>
+        <item>20X</item>
+        <item>20Y</item>
+        <item>20Z</item>
+        <item>83</item>
+        <item>404</item>
+        <item>404A</item>
+        <item>404X</item>
+        <item>409A</item>
+        <item>510Z</item>
+        <item>599A</item>
+        <item>599B</item>
+        <item>687A</item>
+        <item>687D</item>
+        <item>687E</item>
+        <item>986A</item>
+        <item>986B</item>
+        <item>986D</item>
+        <item>1138</item>
+        <item>1138B</item>
+        <item>1138G</item>
+        <item>1437G</item>
+        <item>1437V</item>
+        <item>1437Z</item>
+        <item>3309A</item>
+        <item>3309B</item>
+        <item>4800</item>
+        <item>4800B</item>
+        <item>4800C</item>
+        <item>5871A</item>
+        <item>5871B</item>
+        <item>5871C</item>
+        <item>6627</item>
+        <item>6627B</item>
+        <item>8314</item>
+        <item>8888G</item>
+        <item>8888X</item>
+        <item>9078</item>
+        <item>9078B</item>
+        <item>9078X</item>
+    </string-array>
+</resources>

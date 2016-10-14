@@ -13,10 +13,8 @@ public class GirlView extends View
     public float bitmapX;
     public float bitmapY;
 
-    public GirlView(Context context)
-    {
+    public GirlView(Context context) {
         super(context);
-
         //设置妹子的起始坐标
         bitmapX = 15;
         bitmapY = 110;
@@ -25,8 +23,7 @@ public class GirlView extends View
     //重写View类的onDraw()方法
     @Override
 
-    protected void onDraw(Canvas canvas)
-    {
+    protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
 
         //创建,并且实例化Paint的对象
