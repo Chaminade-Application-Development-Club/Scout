@@ -26,10 +26,10 @@ public class MainActivity extends Activity
     TextView cY;
     TextView cT;
 
-    TextView nearRightScore;
-    TextView farRightScore;
-    TextView nearLeftScore;
-    TextView farLeftScore;
+    Button nearRightScore;
+    Button farRightScore;
+    Button nearLeftScore;
+    Button farLeftScore;
 
     ImageView leftStart;
     ImageView leftInside;
@@ -257,6 +257,44 @@ public class MainActivity extends Activity
                     // Auto time limits 15s
                     public void onTick(long millisUntilFinished) {
                         cT.setText("End: " + millisUntilFinished / 1000);
+                        if(leftSide == true) {
+                            farRightScore.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    starAutoFar = starAutoFar + 2;
+                                    strSAF = Integer.toString(starAutoFar);
+                                    farRightScore.setText(strSAF);
+                                }
+                            });
+
+                            nearRightScore.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    ++starAutoNear;
+                                    strSAN = Integer.toString(starAutoNear);
+                                    nearRightScore.setText(strSAN);
+                                }
+                            });
+                        }
+                            else if(leftSide == false) {
+                            farLeftScore.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    starAutoFar = starAutoFar + 2;
+                                    strSAF = Integer.toString(starAutoFar);
+                                    farLeftScore.setText(strSAF);
+                                }
+                            });
+
+                            nearRightScore.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    ++starAutoNear;
+                                    strSAN = Integer.toString(starAutoNear);
+                                    nearLeftScore.setText(strSAN);
+                                }
+                            });
+                        }
 
                         girl.setOnTouchListener(new View.OnTouchListener() {
                             @Override
@@ -264,26 +302,6 @@ public class MainActivity extends Activity
                                 //设置妹子显示的位置
                                 girl.bitmapX = event.getX() - 36;
                                 girl.bitmapY = event.getY() - 44;
-
-                                if(leftSide == true)
-                                {
-                                    farRightScore.setOnClickListener(new View.OnClickListener() {
-                                        @Override
-                                        public void onClick(View v) {
-                                            ++starAutoFar;
-                                            strSAF = Integer.toString(starAutoFar);
-                                            farRightScore.setText(strSAF);
-                                        }
-                                    });
-
-                                    nearRightScore.setOnClickListener(new View.OnClickListener() {
-                                        @Override
-                                        public void onClick(View v) {
-                                            ++starAutoNear;
-                                            strSAN = Integer.toString(starAutoNear);
-                                            nearRightScore.setText(strSAN);
-                                        }
-                                    });
 
                                     if(girl.bitmapX < 0 )
                                     {
@@ -301,10 +319,7 @@ public class MainActivity extends Activity
                                     {
                                         girl.bitmapY = 520;
                                     }
-                                }
 
-                                else if (leftSide == false)
-                                {
                                     if(girl.bitmapX < 295 )
                                     {
                                         girl.bitmapX = 295 ;
@@ -321,7 +336,7 @@ public class MainActivity extends Activity
                                     {
                                         girl.bitmapY = 520;
                                     }
-                                }
+
 
                                 //调用重绘方法
                                 girl.invalidate();
@@ -440,6 +455,46 @@ public class MainActivity extends Activity
                     // driving portion is 1:45 min
                     public void onTick(long millisUntilFinished) {
                         cT.setText("End: " + millisUntilFinished / 1000);
+                        if(leftSide == true) {
+                            farRightScore.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    starDriverFar = starDriverFar + 2;
+                                    System.out.println(starDriverFar);
+                                    strSDF = Integer.toString(starDriverFar);
+                                    farRightScore.setText(strSDF);
+                                }
+                            });
+
+                            nearRightScore.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    ++starDriverNear;
+                                    System.out.println(starDriverNear);
+                                    strSDN = Integer.toString(starDriverNear);
+                                    nearRightScore.setText(strSDN);
+                                }
+                            });
+                        }
+                            else if (leftSide == false) {
+                            farLeftScore.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    starDriverFar = starDriverFar + 2;
+                                    strSDF = Integer.toString(starDriverFar);
+                                    farLeftScore.setText(strSDF);
+                                }
+                            });
+
+                            nearLeftScore.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    ++starDriverNear;
+                                    strSDN = Integer.toString(starDriverNear);
+                                    nearLeftScore.setText(strSDN);
+                                }
+                            });
+                        }
                         girl.setOnTouchListener(new View.OnTouchListener() {
                             @Override
                             public boolean onTouch(View view, MotionEvent event) {
@@ -447,8 +502,8 @@ public class MainActivity extends Activity
                                 girl.bitmapX = event.getX() - 36;
                                 girl.bitmapY = event.getY() - 44;
 
-                                if(leftSide == true)
-                                {
+
+
                                     if(girl.bitmapX < 0 )
                                     {
                                         girl.bitmapX = 0 ;
@@ -465,10 +520,7 @@ public class MainActivity extends Activity
                                     {
                                         girl.bitmapY = 520;
                                     }
-                                }
 
-                                else if (leftSide == false)
-                                {
                                     if(girl.bitmapX < 295 )
                                     {
                                         girl.bitmapX = 295 ;
@@ -485,7 +537,6 @@ public class MainActivity extends Activity
                                     {
                                         girl.bitmapY = 520;
                                     }
-                                }
 
                                 //调用重绘方法
                                 girl.invalidate();
@@ -573,9 +624,10 @@ public class MainActivity extends Activity
         leftInside = (ImageView) findViewById(R.id.leftInside);
         rightStart = (ImageView) findViewById(R.id.rightStart);
         rightInside = (ImageView) findViewById(R.id.rightInside);
-        nearRightScore = (TextView) findViewById(R.id.rightNear);
-        farRightScore = (TextView) findViewById(R.id.rightFar);
-        nearLeftScore = (TextView) findViewById(R.id.leftNear);
-        farLeftScore = (TextView) findViewById(R.id.leftFar);
+
+        nearRightScore = (Button) findViewById(R.id.rightNear);
+        farRightScore = (Button) findViewById(R.id.rightFar);
+        nearLeftScore = (Button) findViewById(R.id.leftNear);
+        farLeftScore = (Button) findViewById(R.id.leftFar);
     }
 }
