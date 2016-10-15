@@ -3,24 +3,6 @@
     android:layout_width="wrap_content"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <RelativeLayout
-        android:id="@+id/fieldLayout"
-        android:layout_width="match_parent"
-        android:layout_height="600dp"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentEnd="true">
-
-
-        <ImageView
-            android:id="@+id/imageView"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@mipmap/news"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentStart="true" />
-
-    </RelativeLayout>
-
     <TextView
         android:id = "@+id/countDown"
         android:layout_width="wrap_content"
@@ -103,7 +85,7 @@
         android:gravity="center"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text = "y-axis:"
-        android:layout_above="@+id/fieldLayout"
+        android:layout_above="@+id/leftFar"
         android:layout_alignParentStart="true" />
 
     <TextView
@@ -115,5 +97,79 @@
         android:text = "x-axis:"
         android:layout_above="@+id/coordinateY"
         android:layout_alignParentStart="true" />
+
+    <RelativeLayout
+        android:id="@+id/fieldLayout"
+        android:layout_width="match_parent"
+        android:layout_height="600dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true">
+
+        <ImageView
+            android:id="@+id/leftStart"
+            android:layout_width="154dp"
+            android:layout_height="match_parent"
+            android:src="@mipmap/left1"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentStart="true" />
+
+        <ImageView
+            android:id="@+id/leftInside"
+            android:layout_width="145dp"
+            android:layout_height="match_parent"
+            android:src="@mipmap/left2"
+            android:layout_toEndOf="@+id/leftStart" />
+
+        <ImageView
+            android:id="@+id/rightInside"
+            android:layout_width="148dp"
+            android:layout_height="match_parent"
+            android:src="@mipmap/right1"
+            android:layout_toEndOf="@+id/leftInside" />
+
+        <ImageView
+            android:id="@+id/rightStart"
+            android:layout_width="154dp"
+            android:layout_height="match_parent"
+            android:background="@mipmap/right2"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true" />
+    </RelativeLayout>
+
+    <TextView
+        android:id = "@+id/rightFar"
+        android:layout_width="60dp"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/fieldLayout"
+        android:layout_alignParentRight="true"
+        android:text="Far Zone"
+        android:textAppearance="?android:attr/textAppearanceMedium"/>
+
+    <TextView
+        android:id = "@+id/rightNear"
+        android:layout_width="70dp"
+        android:layout_height="wrap_content"
+        android:text="Near Zone"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:layout_above="@+id/fieldLayout"
+        android:layout_marginLeft ="350dp" />
+
+    <TextView
+        android:id = "@+id/leftFar"
+        android:layout_width="60dp"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/fieldLayout"
+        android:layout_alignParentLeft="true"
+        android:text="Far Zone"
+        android:textAppearance="?android:attr/textAppearanceMedium"/>
+
+    <TextView
+        android:id = "@+id/leftNear"
+        android:layout_width="70dp"
+        android:layout_height="wrap_content"
+        android:text="Near Zone"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:layout_above="@+id/fieldLayout"
+        android:layout_marginLeft="150dp" />
 
 </RelativeLayout>
