@@ -14,6 +14,15 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         />
 
+    <CheckBox
+        android:id = "@+id/Checklifted"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text = "Lifted"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="#01579B"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/stchPoint" />
 
     <Spinner
         android:id = "@+id/spinTeamNum"
@@ -97,6 +106,45 @@
         android:text = "x-axis:"
         android:layout_above="@+id/coordinateY"
         android:layout_alignParentStart="true" />
+
+    <RelativeLayout
+        android:layout_width="120dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/btnDrive">
+        <TextView
+            android:id = "@+id/textStarNear"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Near Star:"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="#004D40"/>
+        <TextView
+            android:id = "@+id/textStarFar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Far Star:"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="#004D40"
+            android:layout_below="@+id/textStarNear"/>
+        <TextView
+            android:id = "@+id/textCubeNear"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Near Cube:"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="#004D40"
+            android:layout_below="@+id/textStarFar"/>
+        <TextView
+            android:id = "@+id/textCubeFar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Far Cube:"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="#004D40"
+            android:layout_below="@+id/textCubeNear"/>
+
+    </RelativeLayout>
 
     <RelativeLayout
         android:id="@+id/fieldLayout"
