@@ -1,5 +1,5 @@
 package com.example.huzheyuan.scout;
-import android.content.Intent;
+
 import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.View;
@@ -34,7 +34,6 @@ public class MainActivity extends Activity
     Switch sPoint;
     Spinner teamNumSpin;
     CheckBox lifted;
-    //定义相关变量,依次是妹子显示位置的X,Y坐标
     String strCX;
     String strCY;
     String strCAN;
