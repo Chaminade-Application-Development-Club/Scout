@@ -61,10 +61,14 @@ public class MainActivity extends Activity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        final GirlView girl = new GirlView(MainActivity.this);
+        final GirlView girl = new GirlView(MainActivity.this); // finalize the girl GirlView, which
+        //you will understand soon...
         findViews();
         clear();
         lift();
+        //Don't even try to make these switchers into method! And don't ask me why, think, plus I've
+        //done the experiment already!
+        //Switchers
         sSide.setChecked(false);
         sSide.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -86,7 +90,7 @@ public class MainActivity extends Activity
         });
 
         //Auto mode starts
-        bAuto.setOnClickListener(new View.OnClickListener() {
+        bAuto.setOnClickListener(new View.OnClickListener() { //Auto start button
             @Override
             public void onClick(View v) {
                 if(cuteDriver != null){
@@ -96,33 +100,38 @@ public class MainActivity extends Activity
                 if (cuteAuto != null){
                     cuteAuto.cancel();
                     cuteAuto.onFinish();
-                }
+                } // the if statements here are for avoiding multiple countdown timer bug!!!
+                //start the timer for auto
                 cuteAuto = new CountDownTimer(15000, 1000) {
                     // Auto time limits 15s
                     public void onTick(long millisUntilFinished) {
                         cT.setText("End: " + millisUntilFinished / 1000);
                         scoreStarTally();
                         scoreCubeTally();
+                        //the tallies are for counting the scoring actions ...
+                        //Then, this is the code for drawing a girlon the screen!!!
                         girl.setOnTouchListener(new View.OnTouchListener() {
                             @Override
                             public boolean onTouch(View view, MotionEvent event) {
-                                //设置妹子显示的位置
+                                //设置妹子显示的位置, set the girl's position
                                 girl.bitmapX = event.getX() - 36;
                                 girl.bitmapY = event.getY() - 44;
+                                // the only reason why I minus number from the position is you can
+                                // try to remove it and you will know why!!!
                                 drawGirl(girl);
                                 return true;
                             }
                         });
                     }
-                    public void onFinish(){
+                    public void onFinish(){ // on finish is a important method to know, learn it!
                         resetGirl(girl);
                         cT.setText("End!");
                     }
-                }.start();
+                }.start(); // end of the timer
             }
         });
 
-        //Driver Mode Start
+        //Driver Mode Start, same structure and usage as auto mode
         bDriver.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -158,9 +167,11 @@ public class MainActivity extends Activity
                 }.start();
             }
         });
-        frame.addView(girl);
+        frame.addView(girl); // add a little cute girl on the screen, important!!!
     }
 ////////////////////////////////////////////////////////////////////////////////////////////////////
+    //Here is all themethod I am using!!!
+    //Try to make it explicit ...
     public void findViews() {
         cX = (TextView) findViewById(R.id.coordinateX);
         cY = (TextView) findViewById(R.id.coordinateY);
@@ -236,7 +247,7 @@ public class MainActivity extends Activity
     {
         // For the next person trying to "optimize" this code, please increment the following counter for the
         // the next fool who doesn't read this:
-        // HoursWasted = 42 hours;
+        // HoursWasted = 42 hours;    ------ by Eddie, a little freshman who tried this!
                 if(leftSide == true) {
                     if (girl.bitmapX < 0) girl.bitmapX = 0;
                     else if (girl.bitmapX > 240) girl.bitmapX = 240;
