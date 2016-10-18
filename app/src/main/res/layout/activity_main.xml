@@ -24,6 +24,24 @@
         android:layout_centerHorizontal="true"
         android:layout_below="@+id/stchPoint" />
 
+    <ImageView
+        android:id = "@+id/popStarView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/Checklifted"
+        android:layout_centerHorizontal="true"
+        android:src="@mipmap/star"
+        android:visibility="gone"/>
+
+    <ImageView
+        android:id = "@+id/popCubeView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/Checklifted"
+        android:layout_centerHorizontal="true"
+        android:src="@mipmap/cube"
+        android:visibility="gone"/>
+
     <Spinner
         android:id = "@+id/spinTeamNum"
         android:layout_width="210dp"

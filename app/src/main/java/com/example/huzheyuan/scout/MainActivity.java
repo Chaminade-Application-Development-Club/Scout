@@ -7,6 +7,7 @@ import android.widget.Button;
 import android.app.Activity;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.Switch;
@@ -23,6 +24,8 @@ public class MainActivity extends Activity
     TextView tStarFar;
     TextView tCubeNear;
     TextView tCubeFar;
+    ImageView starPic;
+    ImageView cubePic;
     Button nearRightScore;
     Button farRightScore;
     Button nearLeftScore;
@@ -55,6 +58,8 @@ public class MainActivity extends Activity
     boolean leftSide = true;
     boolean up = true;
     boolean liftedGirl = false;
+    boolean visibilityStar;
+    boolean visibilityCube;
     CountDownTimer cuteDriver = null;
     CountDownTimer cuteAuto = null;
     @Override
@@ -142,7 +147,7 @@ public class MainActivity extends Activity
                 if (cuteAuto != null){
                     cuteAuto.cancel();
                     cuteAuto.onFinish();
-                }
+                } // the if loop here fix the repeated timer bug!!!
                 cuteDriver = new CountDownTimer(105000, 1000) {
                     // Driver time limits 105s
                     public void onTick(long millisUntilFinished) {
@@ -192,9 +197,11 @@ public class MainActivity extends Activity
         nearLeftScore = (Button) findViewById(R.id.leftNear);
         farLeftScore = (Button) findViewById(R.id.leftFar);
         lifted = (CheckBox) findViewById(R.id.Checklifted);
+        starPic = (ImageView) findViewById(R.id.popStarView);
+        cubePic = (ImageView) findViewById(R.id.popCubeView);
     }
 
-    public void clear()
+    public void clear() //need to be rewrite
     {
         bClear.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -220,9 +227,9 @@ public class MainActivity extends Activity
                 if(leftSide == true)
                 {
                     strSAF = Integer.toString(starAutoFar);
-                    farRightScore.setText(strSAF);
+                    tStarFar.setText(strSAF);
                     strSAN = Integer.toString(starAutoNear);
-                    nearRightScore.setText(strSAN);
+                    tStarNear.setText(strSAN);
                     strSDF = Integer.toString(starDriverFar);
                     farRightScore.setText(strSDF);
                     strSDN = Integer.toString(starDriverNear);
@@ -318,6 +325,10 @@ public class MainActivity extends Activity
                     System.out.println(starDriverFar);
                     strSDF = Integer.toString(starDriverFar);
                     tStarFar.setText("Far Star: " + strSDF);
+                    visibilityStar = true;
+                    visibilityCube = false;
+                    popCube();
+                    popStar();
                 }
             });
             nearRightScore.setOnClickListener(new View.OnClickListener() {
@@ -327,6 +338,10 @@ public class MainActivity extends Activity
                     System.out.println(starDriverNear);
                     strSDN = Integer.toString(starDriverNear);
                     tStarNear.setText("Near Star: " +strSDN);
+                    visibilityStar = true;
+                    visibilityCube = false;
+                    popCube();
+                    popStar();
                 }
             });
         }
@@ -337,6 +352,10 @@ public class MainActivity extends Activity
                     starDriverFar = starDriverFar + 2;
                     strSDF = Integer.toString(starDriverFar);
                     tStarFar.setText("Far Star: " +strSDF);
+                    visibilityStar = true;
+                    visibilityCube = false;
+                    popCube();
+                    popStar();
                 }
             });
             nearLeftScore.setOnClickListener(new View.OnClickListener() {
@@ -345,6 +364,10 @@ public class MainActivity extends Activity
                     ++starDriverNear;
                     strSDN = Integer.toString(starDriverNear);
                     tStarNear.setText("Near Star: " +strSDN);
+                    visibilityStar = true;
+                    visibilityCube = false;
+                    popCube();
+                    popStar();
                 }
             });
         }
@@ -360,6 +383,10 @@ public class MainActivity extends Activity
                     System.out.println(cubeDriverFar);
                     strCDF = Integer.toString(cubeDriverFar);
                     tCubeFar.setText("Far Cube: " + strCDF);
+                    visibilityCube = true;
+                    visibilityStar = false;
+                    popStar();
+                    popCube();
                     return true;
                 }
             });
@@ -371,28 +398,40 @@ public class MainActivity extends Activity
                     System.out.println(cubeDriverNear);
                     strCDN = Integer.toString(cubeDriverNear);
                     tCubeNear.setText("Near Cube: " +strCDN);
+                    visibilityCube = true;
+                    visibilityStar = false;
+                    popStar();
+                    popCube();
                     return true;
                 }
             });
         }
         else if (leftSide == false) {
-            farRightScore.setOnLongClickListener(new View.OnLongClickListener() {
+            farLeftScore.setOnLongClickListener(new View.OnLongClickListener() {
                 @Override
                 public boolean onLongClick(View v) {
                     cubeDriverFar = cubeDriverFar + 4;
                     System.out.println(cubeDriverFar);
                     strCDF = Integer.toString(cubeDriverFar);
                     tCubeFar.setText("Far Cube: " + strCDF);
+                    visibilityCube = true;
+                    visibilityStar = false;
+                    popStar();
+                    popCube();
                     return true;
                 }
             });
-            nearRightScore.setOnLongClickListener(new View.OnLongClickListener() {
+            nearLeftScore.setOnLongClickListener(new View.OnLongClickListener() {
                 @Override
                 public boolean onLongClick(View v) {
                     cubeDriverNear = cubeDriverNear + 2;
                     System.out.println(cubeDriverNear);
                     strCDN = Integer.toString(cubeDriverNear);
                     tCubeNear.setText("Near Cube: " + strCDN);
+                    visibilityStar = false;
+                    visibilityCube = true;
+                    popStar();
+                    popCube();
                     return true;
                 }
             });
@@ -409,5 +448,27 @@ public class MainActivity extends Activity
                 System.out.println(liftedGirl);
             }
         });
+    }
+
+    public void popStar()
+    {
+        if(visibilityStar) starPic.setVisibility(View.VISIBLE);
+        else starPic.setVisibility(View.INVISIBLE);
+    }
+
+    public void popCube()
+    {
+        if (!visibilityStar && visibilityCube) cubePic.setVisibility(View.VISIBLE);
+        else cubePic.setVisibility(View.INVISIBLE);
+    }
+
+    public void disappearStar()
+    {
+
+    }
+
+    public void disappearCube()
+    {
+
     }
 }
