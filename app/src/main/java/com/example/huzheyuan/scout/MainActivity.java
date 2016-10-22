@@ -366,13 +366,8 @@ public class MainActivity extends Activity
             farRightScore.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if(autoMode){
-                        autoFarStar();
-                    }
-                    else{
-                        driverFarStar();
-                    }
-
+                    if(autoMode) autoFarStar();
+                    else driverFarStar();
                     visibilityStar = true;
                     visibilityCube = false;
                     popCube();
@@ -382,12 +377,8 @@ public class MainActivity extends Activity
             nearRightScore.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if(autoMode){
-                        autoNearStar();
-                    }
-                    else{
-                        driverNearStar();
-                    }
+                    if(autoMode) autoNearStar();
+                    else driverNearStar();
                     visibilityStar = true;
                     visibilityCube = false;
                     popCube();
@@ -399,12 +390,8 @@ public class MainActivity extends Activity
             farLeftScore.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if(autoMode){
-                        autoFarStar();
-                    }
-                    else{
-                        driverFarStar();
-                    }
+                    if(autoMode)autoFarStar();
+                    else driverFarStar();
                     visibilityStar = true;
                     visibilityCube = false;
                     popCube();
@@ -414,12 +401,8 @@ public class MainActivity extends Activity
             nearLeftScore.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if(autoMode){
-                        autoNearStar();
-                    }
-                    else{
-                        driverNearStar();
-                    }
+                    if(autoMode) autoNearStar();
+                    else driverNearStar();
                     visibilityStar = true;
                     visibilityCube = false;
                     popCube();
@@ -433,12 +416,8 @@ public class MainActivity extends Activity
             farRightScore.setOnLongClickListener(new View.OnLongClickListener() {
                 @Override
                 public boolean onLongClick(View v) {
-                    if(autoMode){
-                        autoFarCube();
-                    }
-                    else{
-                        driverFarCube();
-                    }
+                    if(autoMode)autoFarCube();
+                    else driverFarCube();
                     visibilityCube = true;
                     visibilityStar = false;
                     popStar();
@@ -450,12 +429,8 @@ public class MainActivity extends Activity
             nearRightScore.setOnLongClickListener(new View.OnLongClickListener() {
                 @Override
                 public boolean onLongClick(View v) {
-                    if(autoMode){
-                        autoNearCube();
-                    }
-                    else{
-                        driverNearCube();
-                    }
+                    if(autoMode) autoNearCube();
+                    else driverNearCube();
                     visibilityCube = true;
                     visibilityStar = false;
                     popStar();
@@ -468,12 +443,8 @@ public class MainActivity extends Activity
             farLeftScore.setOnLongClickListener(new View.OnLongClickListener() {
                 @Override
                 public boolean onLongClick(View v) {
-                    if(autoMode){
-                        autoFarCube();
-                    }
-                    else{
-                        driverFarCube();
-                    }
+                    if(autoMode)autoFarCube();
+                    else driverFarCube();
                     visibilityCube = true;
                     visibilityStar = false;
                     popStar();
@@ -484,12 +455,8 @@ public class MainActivity extends Activity
             nearLeftScore.setOnLongClickListener(new View.OnLongClickListener() {
                 @Override
                 public boolean onLongClick(View v) {
-                    if(autoMode){
-                        autoNearCube();
-                    }
-                    else{
-                        driverNearCube();
-                    }
+                    if(autoMode) autoNearCube();
+                    else driverNearCube();
                     visibilityStar = false;
                     visibilityCube = true;
                     popStar();
