@@ -78,32 +78,6 @@
         android:textColorHint="#01579B"
         />
 
-    <Button
-        android:id="@+id/btnAuto"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text = "Auto"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:textAllCaps="false"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentRight="true"
-        android:background="@null"
-        android:textColor="#01579B"
-        />
-
-    <Button
-        android:id="@+id/btnDrive"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text = "Driver"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:textAllCaps="false"
-        android:layout_below="@+id/btnAuto"
-        android:layout_alignParentRight="true"
-        android:background="@null"
-        android:textColor="#01579B"
-        />
-
     <TextView
         android:id = "@+id/coordinateY"
         android:layout_width="wrap_content"
@@ -126,57 +100,16 @@
         android:layout_alignParentStart="true" />
 
     <RelativeLayout
-        android:layout_width="120dp"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_below="@+id/btnDrive">
-        <TextView
-            android:id = "@+id/textStarNear"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Near Star:"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:textColor="#004D40"/>
-        <TextView
-            android:id = "@+id/textStarFar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Far Star:"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:textColor="#004D40"
-            android:layout_below="@+id/textStarNear"/>
-        <TextView
-            android:id = "@+id/textCubeNear"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Near Cube:"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:textColor="#004D40"
-            android:layout_below="@+id/textStarFar"/>
-        <TextView
-            android:id = "@+id/textCubeFar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Far Cube:"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:textColor="#004D40"
-            android:layout_below="@+id/textCubeNear"/>
-
-    </RelativeLayout>
-
-    <RelativeLayout
         android:id="@+id/fieldLayout"
         android:layout_width="match_parent"
         android:layout_height="600dp"
         android:layout_alignParentBottom="true"
         android:layout_alignParentStart="true">
-
         <ImageView
             android:id="@+id/leftInside"
             android:layout_width="600dp"
             android:layout_height="match_parent"
             android:src="@mipmap/news" />
-
     </RelativeLayout>
 
     <Button
@@ -219,12 +152,137 @@
         android:id="@+id/btnClear"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text = "Clear"
+        android:text = "Submit"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:textAllCaps="false"
         android:background="@null"
         android:textColor="#01579B"
         android:layout_alignBottom="@+id/stchPoint"
         android:layout_alignParentStart="true" />
+
+    <RelativeLayout
+        android:layout_width="180dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/relativeLayout"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true">
+
+        <Button
+            android:id="@+id/btnDrive"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text = "Driver"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textAllCaps="false"
+            android:layout_alignParentRight="true"
+            android:background="@null"
+            android:textColor="#01579B"
+            />
+
+        <Button
+            android:id="@+id/btnAuto"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text = "Auto"
+            android:gravity="start|center"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textAllCaps="false"
+            android:background="@null"
+            android:textColor="#01579B"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:layout_toLeftOf="@+id/btnDrive" />
+
+        <TextView
+            android:id = "@+id/textDriverStarNear"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Near Star:"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:textColor="#004D40"
+            android:gravity="start|center"
+            android:layout_below="@+id/btnDrive"
+            android:layout_alignStart="@+id/textDriverStarFar"/>
+
+        <TextView
+            android:id = "@+id/textDriverCubeNear"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Near Cube:"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:textColor="#004D40"
+            android:gravity="start|center"
+            android:layout_below="@+id/textDriverStarFar"
+            android:layout_alignParentRight="true"
+            />
+
+        <TextView
+            android:id = "@+id/textDriverCubeFar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Far Cube:"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:textColor="#004D40"
+            android:gravity="start|center"
+            android:layout_alignStart="@+id/textDriverCubeNear"
+            android:layout_alignParentRight="false"
+            android:layout_below="@+id/textDriverCubeNear" />
+
+        <TextView
+            android:id="@+id/textAutoStarNear"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Near Star:"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:textColor="#004D40"
+            android:layout_below="@+id/btnAuto"
+            android:layout_marginRight="20dp"
+            />
+
+        <TextView
+            android:id="@+id/textAutoStarFar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Far Star:"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:textColor="#004D40"
+            android:layout_marginRight="20dp"
+            android:layout_alignStart="@+id/textAutoStarNear"
+            android:layout_below="@+id/textAutoStarNear" />
+
+        <TextView
+            android:id="@+id/textAutoCubeNear"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Near Cube:"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:textColor="#004D40"
+            android:layout_marginRight="20dp"
+            android:layout_alignStart="@+id/textAutoStarNear"
+            android:layout_below="@+id/textAutoStarFar" />
+
+        <TextView
+            android:id="@+id/textAutoCubeFar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Far Cube:"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:textColor="#004D40"
+            android:layout_marginRight="20dp"
+            android:layout_alignStart="@+id/textAutoStarNear"
+            android:layout_below="@+id/textAutoCubeNear" />
+
+        <TextView
+            android:id = "@+id/textDriverStarFar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Far Star:"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:textColor="#004D40"
+            android:gravity="start|center"
+            android:layout_below="@+id/textDriverStarNear"
+            android:layout_alignStart="@+id/textDriverCubeNear" />
+
+    </RelativeLayout>
 
 </RelativeLayout>
