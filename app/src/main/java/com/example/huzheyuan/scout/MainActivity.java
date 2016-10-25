@@ -1,7 +1,11 @@
 package com.example.huzheyuan.scout;
 
+import android.app.Service;
 import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteOpenHelper;
 import android.os.Bundle;
+import android.os.Vibrator;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AdapterView;
@@ -17,66 +21,34 @@ import android.widget.TextView;
 import android.os.CountDownTimer;
 import android.widget.Toast;
 import tyrantgit.explosionfield.ExplosionField;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.nio.channels.FileChannel;
 
 public class MainActivity extends Activity
 {
     RelativeLayout frame;
-    TextView cX;
-    TextView cY;
-    TextView cT;
-    TextView tDriverStarNear;
-    TextView tDriverStarFar;
-    TextView tDriverCubeNear;
-    TextView tDriverCubeFar;
-    TextView tAutoStarNear;
-    TextView tAutoStarFar;
-    TextView tAutoCubeNear;
-    TextView tAutoCubeFar;
-    ImageView starPic;
-    ImageView cubePic;
-    Button nearRightScore;
-    Button farRightScore;
-    Button nearLeftScore;
-    Button farLeftScore;
-    Button bAuto;
-    Button bDriver;
-    Button bClear;
-    Switch sSide;
-    Switch sPoint;
+    TextView cX,cY,cT,tDriverStarNear,tDriverStarFar,tDriverCubeNear,tDriverCubeFar;
+    TextView tAutoStarNear,tAutoStarFar, tAutoCubeNear,tAutoCubeFar ;
+    ImageView starPic,cubePic;
+    Button nearRightScore,farRightScore,nearLeftScore,farLeftScore,bAuto,bDriver,bClear;
+    Switch sSide,sPoint;
     Spinner teamNumSpin;
     CheckBox lifted;
-    String strCX;
-    String strCY;
-    String strCAN;
-    String strCAF;
-    String strCDN;
-    String strCDF;
-    String strSAN;
-    String strSAF;
-    String strSDN;
-    String strSDF;
-    String teamNumber;
-    String[] teamNumberArray; //Set all the variables
-    int cubeAutoNear = 0;
-    int cubeAutoFar = 0;
-    int starAutoNear = 0;
-    int starAutoFar = 0;
-    int cubeDriverNear = 0;
-    int cubeDriverFar = 0;
-    int starDriverNear = 0;
-    int starDriverFar = 0;
-    boolean leftSide = true;
-    boolean up = true;
-    boolean liftedGirl = false;
-    boolean autoMode = false;
-    boolean visibilityStar = false;
-    boolean visibilityCube = false;
-    CountDownTimer cuteDriver = null;
-    CountDownTimer cuteAuto = null;
+    String strCX,strCY,strCAN,strCAF,strCDN,strCDF,strSAN,strSAF,strSDN,strSDF,teamNumber;
+    String[] teamNumberArray;
+    int cubeAutoNear = 0,cubeAutoFar = 0,starAutoNear = 0,starAutoFar = 0;
+    int cubeDriverNear = 0,cubeDriverFar = 0,starDriverNear = 0,starDriverFar = 0;
+    boolean leftSide = true,up = true,liftedGirl = false,autoMode = false;
+    boolean visibilityStar = false,visibilityCube = false; //Set all the variables
+    CountDownTimer cuteDriver = null,cuteAuto = null;
     ExplosionField boom;
+    DataBaseContext dBContext;
     DataBaseHelper dataBaseHelper;
-    SQLiteDatabase db;
-
+    SQLiteDatabase dB;
+    Vibrator girlFriend;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -218,6 +190,7 @@ public class MainActivity extends Activity
         teamNumSpin = (Spinner) findViewById(R.id.spinTeamNum);
         lifted = (CheckBox) findViewById(R.id.Checklifted);
         frame = (RelativeLayout) findViewById(R.id.fieldLayout);
+        girlFriend = (Vibrator) getSystemService(Service.VIBRATOR_SERVICE);
     }
     public void clear() // Highly emergency issues right here!!! The clear method is broken and not function too properly.
     //It need to be rewritten and clarified!!!
@@ -422,6 +395,7 @@ public class MainActivity extends Activity
                     visibilityStar = false;
                     popStar();
                     popCube();
+                    excited();
                     return true;
                 }
             });
@@ -435,6 +409,7 @@ public class MainActivity extends Activity
                     visibilityStar = false;
                     popStar();
                     popCube();
+                    excited();
                     return true;
                 }
             });
@@ -449,6 +424,7 @@ public class MainActivity extends Activity
                     visibilityStar = false;
                     popStar();
                     popCube();
+                    excited();
                     return true;
                 }
             });
@@ -461,10 +437,15 @@ public class MainActivity extends Activity
                     visibilityCube = true;
                     popStar();
                     popCube();
+                    excited();
                     return true;
                 }
             });
         }
+    }
+    public void excited(){ // this is a method for vibrator, which you should know how to use it!
+        girlFriend.cancel();
+        girlFriend.vibrate(500);
     }
     public void lift() {
         lifted.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -479,7 +460,6 @@ public class MainActivity extends Activity
     public void popStar() {
         if(visibilityStar) starPic.setVisibility(View.VISIBLE);
         else starPic.setVisibility(View.GONE);
-
     }
     public void popCube() {
         if (visibilityCube) cubePic.setVisibility(View.VISIBLE);
@@ -497,7 +477,27 @@ public class MainActivity extends Activity
     }// the if statements here are for avoiding multiple countdown timer bug!!!
     //start the timer for auto
 
-    public void startDataBase(){
-        dataBaseHelper = new DataBaseHelper(MainActivity.this, "data.db", null, 1);
+    public void startDataBase() {
+        dataBaseHelper = new DataBaseHelper(MainActivity.this);
+        dataBaseHelper.getReadableDatabase();
+        dataBaseHelper.getWritableDatabase();
+        File f = new File(getExternalFilesDir(null).getAbsolutePath() + File.separator + dataBaseHelper.DATABASE_NAME);// 创建文件
+        if(f.exists()) {
+            Toast.makeText(MainActivity.this, "Database has been created", Toast.LENGTH_SHORT).show();
+            System.out.println(f);
+//
+//            FileChannel source=null;
+//            FileChannel destination=null;
+//            try {
+//                source = new FileInputStream(f).getChannel();
+//                destination = new FileOutputStream(f).getChannel();
+//                destination.transferFrom(source, 0, source.size());
+//                source.close();
+//                destination.close();
+//                Toast.makeText(this, "DB Exported!", Toast.LENGTH_LONG).show();
+//            } catch(IOException e) {
+//                e.printStackTrace();
+//            }
+        }
     }
 }
