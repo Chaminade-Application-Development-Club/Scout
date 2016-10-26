@@ -485,17 +485,12 @@ public class MainActivity extends Activity
         if(f.exists()) {
             Toast.makeText(MainActivity.this, "Database has been created", Toast.LENGTH_SHORT).show();
             System.out.println(f);
-//
-//            FileChannel source=null;
-//            FileChannel destination=null;
 //            try {
-//                source = new FileInputStream(f).getChannel();
-//                destination = new FileOutputStream(f).getChannel();
-//                destination.transferFrom(source, 0, source.size());
-//                source.close();
-//                destination.close();
-//                Toast.makeText(this, "DB Exported!", Toast.LENGTH_LONG).show();
-//            } catch(IOException e) {
+//                FileOutputStream output = new FileOutputStream(f);
+//                f.setReadable(true);
+//                f.setWritable(true);
+//                output.close();
+//            } catch (IOException e) {
 //                e.printStackTrace();
 //            }
         }

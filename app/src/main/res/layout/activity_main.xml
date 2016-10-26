@@ -31,7 +31,7 @@
         android:layout_below="@+id/Checklifted"
         android:layout_centerHorizontal="true"
         android:src="@mipmap/star"
-        android:visibility="gone"/>
+        android:visibility="invisible"/>
 
     <ImageView
         android:id = "@+id/popCubeView"
@@ -40,7 +40,7 @@
         android:layout_below="@+id/Checklifted"
         android:layout_centerHorizontal="true"
         android:src="@mipmap/cube"
-        android:visibility="gone"/>
+        android:visibility="invisible"/>
 
     <Spinner
         android:id = "@+id/spinTeamNum"
