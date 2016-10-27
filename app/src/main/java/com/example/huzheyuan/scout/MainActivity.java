@@ -26,6 +26,12 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.channels.FileChannel;
+import java.util.Iterator;
+import java.util.Set;
+
+import android.bluetooth.BluetoothAdapter;
+import android.bluetooth.BluetoothDevice;
+import android.content.Intent;
 
 public class MainActivity extends Activity
 {
@@ -485,14 +491,30 @@ public class MainActivity extends Activity
         if(f.exists()) {
             Toast.makeText(MainActivity.this, "Database has been created", Toast.LENGTH_SHORT).show();
             System.out.println(f);
-//            try {
-//                FileOutputStream output = new FileOutputStream(f);
-//                f.setReadable(true);
-//                f.setWritable(true);
-//                output.close();
-//            } catch (IOException e) {
-//                e.printStackTrace();
-//            }
         }
+    }
+
+    public void bTHelper(){
+        BluetoothAdapter bTAdapter = BluetoothAdapter.getDefaultAdapter();
+        //判断BluetoothAdapter对象是否为空，如果为空，则表明本机没有蓝牙设备
+        if(bTAdapter != null) {
+            Toast.makeText(MainActivity.this, "BlueTooth is Enabled", Toast.LENGTH_SHORT).show();
+            if(!bTAdapter.isEnabled()) {
+            //如果蓝牙设备不可用的话,创建一个intent对象,该对象用于启动一个Activity,提示用户启动蓝牙适配器
+                Intent intent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
+                 startActivity(intent);
+               }
+             //得到所有已经配对的蓝牙适配器对象
+              Set<BluetoothDevice> devices = bTAdapter.getBondedDevices();
+            if(devices.size()>0) {//用迭代
+                for(Iterator iterator = devices.iterator(); iterator.hasNext();) {
+                     //得到BluetoothDevice对象,也就是说得到配对的蓝牙适配器
+                    BluetoothDevice device = (BluetoothDevice)iterator.next();
+                     //得到远程蓝牙设备的地址
+                    Log.d("Tag",device.getAddress());
+                }
+             }
+          }
+        else System.out.println("没有蓝牙设备");
     }
 }

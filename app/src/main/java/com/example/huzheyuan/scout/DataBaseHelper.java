@@ -24,7 +24,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         /**
          * 在数据库第一次生成的时候会调用这个方法，同时我们在这个方法里边生成数据库表
          */
-        String strSql = "CREATE TABLE " + TABLE_NAME + " (id INTEGER PRIMARY KEY," + TEXT + " text )";
+        String strSql = "CREATE TABLE " + TABLE_NAME + " (id INTEGER PRIMARY KEY AUTOINCREMENT,)";
         // CREATE TABLE 创建一张表 然后后面是我们的表名
         // 然后表的列，第一个是id 方便操作数据,int类型
         // PRIMARY KEY 是指主键 这是一个int型,用于唯一的标识一行;
