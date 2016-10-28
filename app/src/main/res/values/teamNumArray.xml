@@ -1,77 +1,77 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string-array name="data">
-        <item>Select team number</item>
-        <item>20X</item>
-        <item>20Y</item>
-        <item>20Z</item>
-        <item>83</item>
-        <item>404</item>
-        <item>404A</item>
-        <item>404X</item>
-        <item>409A</item>
-        <item>510Z</item>
-        <item>599A</item>
-        <item>599B</item>
-        <item>687A</item>
-        <item>687D</item>
-        <item>687E</item>
-        <item>986A</item>
-        <item>986B</item>
-        <item>986D</item>
-        <item>1138</item>
-        <item>1138B</item>
-        <item>1138G</item>
-        <item>1437G</item>
-        <item>1437V</item>
-        <item>1437Z</item>
-        <item>3309A</item>
-        <item>3309B</item>
-        <item>4800</item>
-        <item>4800B</item>
-        <item>4800C</item>
-        <item>5871A</item>
-        <item>5871B</item>
-        <item>5871C</item>
-        <item>6627</item>
-        <item>6627B</item>
-        <item>8314</item>
-        <item>8888G</item>
-        <item>8888X</item>
-        <item>9078</item>
-        <item>9078B</item>
-        <item>9078X</item>
+        <item>Select_team_number</item>
+        <item>62     </item>
+        <item>62B    </item>
+        <item>62K    </item>
+        <item>62R    </item>
+        <item>62V    </item>
+        <item>62Z    </item>
+        <item>83     </item>
+        <item>224    </item>
+        <item>424B   </item>
+        <item>424D   </item>
+        <item>424R   </item>
+        <item>424W   </item>
+        <item>1138   </item>
+        <item>1138B  </item>
+        <item>1138G  </item>
+        <item>4621A  </item>
+        <item>4621B  </item>
+        <item>4621C  </item>
+        <item>5026A  </item>
+        <item>5026B  </item>
+        <item>7983F  </item>
+        <item>7983S  </item>
+        <item>7983W  </item>
+        <item>7983Y  </item>
+        <item>9917S  </item>
+        <item>19651E </item>
+        <item>19651S </item>
+        <item>19651W </item>
+        <item>93063A </item>
+        <item>98994  </item>
+        <!--<item> </item>-->
+        <!--<item> </item>-->
+        <!--<item> </item>-->
+        <!--<item> </item>-->
+        <!--<item> </item>-->
+        <!--<item> </item>-->
+        <!--<item> </item>-->
+        <!--<item> </item>-->
+        <!--<item> </item>-->
     </string-array>
 
-    Team	Team Name	Organization	Location
-    62	Kanagasabapathys	Harvard-Westlake	Studio City, California, United States
-    62B	Kanagasabapathys	Harvard-Westlake	Studio City, California, United States
-    62K	Kanagasabapathys	Harvard-Westlake	Studio City, California, United States
-    62R	Kanagasabapathys	Harvard-Westlake	Studio City, California, United States
-    62V	Kanagasabapathys	Harvard-Westlake	Studio City, California, United States
-    62Z	Kanagasabapathys	Harvard-Westlake	Studio City, California, United States
-    83	Eagle Engineering MS	Chaminade Middle School	Chatsworth, California, United States
-    224	Crew 224 Sharks	Crew 224	Malibu, California, United States
-    424B	BHS blue	Bakersfield High School	Bakersfield, California, United States
-    424D	BHS Drillers	Bakersfield High School	Bakersfield, California, United States
-    424R	BHS Roughnecks	Bakersfield High School	Bakersfield, California, United States
-    424W	BHS white	Bakersfield High School	Bakersfield, California, United States
-    1138	Eagle Engineering A	Chaminade College Preparatory	West Hills, California, United States
-    1138B	Eagle Engineering	Chaminade College Preparatory	West Hills, California, United States
-    1138G	Eagle Engineering	Chaminade College Preparatory	West Hills, California, United States
-    4621A	Frontier Titans A	Frontier High School	Bakersfield, California, United States
-    4621B	Frontier Titans B	Frontier High School	Bakersfield, California, United States
-    4621C	Frontier Titans C	Frontier High School	Bakersfield, California, United States
-    5026A	Mission Prep Royals A	Mission College Prep	San Luis Obispo, California, United States
-    5026B	Mission Prep Royals B	Mission College Prep	San Luis Obispo, California, United States
-    7983F	Centennial CyberHawks F	Centennial High School	Bakersfield, California, United States
-    7983S	Centennial CyberHawks S	Centennial High School	Bakersfield, California, United States
-    7983W	Centennial CyberHawks W	Centennial High School	Bakersfield, California, United States
-    7983Y	Centennial CyberHawks Y	Centennial High School	Bakersfield, California, United States
-    9917S	RoboLions	Fairfax High School	West Hollywood, California, United States
-    19651E	Viking Robotics	West High School	Bakersfield, California, United States
-    19651S	Viking Robotics	West High School	Bakersfield, California, United States
-    19651W	Viking Robotics	West High School	Bakersfield, California, United States
-    93063A	Simi Tech Robotics	Simi Tech Robotics	Simi Valley, California, United States
-    98994	Mojave HS Mustangs	Mojave Jr/Sr High School	Mojave, California, United States
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 </resources>

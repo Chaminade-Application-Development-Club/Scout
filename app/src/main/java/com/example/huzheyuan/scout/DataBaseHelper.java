@@ -9,14 +9,17 @@ import java.io.File;
 
 public class DataBaseHelper extends SQLiteOpenHelper {
 
+    MainActivity mainActivity = new MainActivity();
     public final static int VERSION = 1;// 版本号
-    public final static String TABLE_NAME = "teamData";// 表名
+    String TABLE_NAME = "teamData";// 表名
     //public final static String ID = "id";// 后面ContentProvider使用
     public final static String TEXT = "text";
     public static final String DATABASE_NAME = "teamData.db";
     public DataBaseHelper(Context context) {
-        super(context, context.getExternalFilesDir(null).getAbsolutePath() + File.separator + DATABASE_NAME,null,VERSION);
-        SQLiteDatabase.openOrCreateDatabase(context.getExternalFilesDir(null).getAbsolutePath() + File.separator + DATABASE_NAME,null);
+        super(context, context.getExternalFilesDir(null).getAbsolutePath()
+                + File.separator + DATABASE_NAME,null,VERSION);
+        SQLiteDatabase.openOrCreateDatabase(context.getExternalFilesDir(null).getAbsolutePath()
+                + File.separator + DATABASE_NAME,null);
     }
 
     @Override
@@ -24,7 +27,11 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         /**
          * 在数据库第一次生成的时候会调用这个方法，同时我们在这个方法里边生成数据库表
          */
-        String strSql = "CREATE TABLE " + TABLE_NAME + " (id INTEGER PRIMARY KEY AUTOINCREMENT,)";
+        String strSql = "CREATE TABLE " + TABLE_NAME +
+                " (_id TEXT PRIMARY KEY , teamNumber TEXT," +
+                " Mode TEXT, time TEXT, " +
+                "positionX TEXT, positionY TEXT, SAN TEXT, SAF TEXT, SDN TEXT, SDF TEXT, CAN TEXT, CAF TEXT, " +
+                "CDN TEXT, CDF TEXT, lifted TEXT)";
         // CREATE TABLE 创建一张表 然后后面是我们的表名
         // 然后表的列，第一个是id 方便操作数据,int类型
         // PRIMARY KEY 是指主键 这是一个int型,用于唯一的标识一行;

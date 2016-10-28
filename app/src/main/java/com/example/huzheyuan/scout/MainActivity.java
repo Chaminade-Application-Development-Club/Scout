@@ -1,6 +1,7 @@
 package com.example.huzheyuan.scout;
 
 import android.app.Service;
+import android.content.ContentValues;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.os.Bundle;
@@ -13,6 +14,7 @@ import android.widget.Button;
 import android.app.Activity;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
+import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
@@ -43,7 +45,9 @@ public class MainActivity extends Activity
     Switch sSide,sPoint;
     Spinner teamNumSpin;
     CheckBox lifted;
-    String strCX,strCY,strCAN,strCAF,strCDN,strCDF,strSAN,strSAF,strSDN,strSDF,teamNumber;
+    String strCX,strCY,strCAN,strCAF,strCDN,strCDF,strSAN,strSAF,strSDN,strSDF,teamNumber, mode,
+            lift = "not lifted";
+    long time;
     String[] teamNumberArray;
     int cubeAutoNear = 0,cubeAutoFar = 0,starAutoNear = 0,starAutoFar = 0;
     int cubeDriverNear = 0,cubeDriverFar = 0,starDriverNear = 0,starDriverFar = 0;
@@ -53,23 +57,27 @@ public class MainActivity extends Activity
     ExplosionField boom;
     DataBaseContext dBContext;
     DataBaseHelper dataBaseHelper;
-    SQLiteDatabase dB;
+    SQLiteDatabase dataBase;
     Vibrator girlFriend;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        final GirlView girl = new GirlView(MainActivity.this); // finalize the girl GirlView, which
-        //you will understand soon...
+        // finalize the girl GirlView, which you will understand soon... Try to delete this code!!
+        final GirlView girl = new GirlView(MainActivity.this);
+        // the explode boom is an experiment animation
         boom = ExplosionField.attach2Window(this);
         startDataBase();
         findViews();
         clear();
         lift();
-        //Don't even try to make these switchers into method! And don't ask me why, think, plus I've
-        //done the experiment already!
-        //Switchers
+        selectTeam();
+        /**
+         * Don't even try to make these switchers into method! And don't ask me why, think, plus
+         * I've done the experiment already!
+         */
         sSide.setChecked(false);
         sSide.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -88,22 +96,12 @@ public class MainActivity extends Activity
                 resetGirl(girl);
             }
         });
-        teamNumSpin.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                teamNumberArray = getResources().getStringArray(R.array.data);
-                teamNumber = teamNumberArray[position];
-                Toast.makeText(MainActivity.this, "Team: "+teamNumberArray[position], Toast.LENGTH_SHORT).show();
-            }
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-            }
-        });
         //Auto mode starts
         bAuto.setOnClickListener(new View.OnClickListener() { //Auto start button
             @Override
             public void onClick(View v) {
                 autoMode = true;
+                mode = "auto";
                 Toast.makeText(MainActivity.this, "Auto Mode Starts", Toast.LENGTH_SHORT).show();
                 timerBug();
                 cuteAuto = new CountDownTimer(15000, 1000) {
@@ -111,7 +109,8 @@ public class MainActivity extends Activity
                     public void onTick(long millisUntilFinished) {
                         scoreStarTally();
                         scoreCubeTally();
-                        cT.setText("End: " + millisUntilFinished / 1000);
+                        time = millisUntilFinished / 1000;
+                        cT.setText("End: " + time);
                         //the tallies are for counting the scoring actions ...
                         //Then, this is the code for drawing a girlon the screen!!!
                         girl.setOnTouchListener(new View.OnTouchListener() {
@@ -128,7 +127,6 @@ public class MainActivity extends Activity
                         });
                     }
                     public void onFinish(){ // on finish is a important method to know, learn it!
-
                         resetGirl(girl);
                         cT.setText("End!");
                     }
@@ -140,11 +138,13 @@ public class MainActivity extends Activity
             @Override
             public void onClick(View v) {
                 autoMode = false;
+                mode = "driver";
                 Toast.makeText(MainActivity.this, "Driver Mode Starts", Toast.LENGTH_SHORT).show();
                 timerBug();
                 cuteDriver = new CountDownTimer(105000, 1000) { // Driver time limits 105s
                     public void onTick(long millisUntilFinished) {
-                        cT.setText("End: " + millisUntilFinished / 1000);
+                        time = millisUntilFinished / 1000;
+                        cT.setText("End: " + time);
                         scoreStarTally();
                         scoreCubeTally();
                         girl.setOnTouchListener(new View.OnTouchListener() {
@@ -233,6 +233,8 @@ public class MainActivity extends Activity
                 tAutoCubeNear.setText("Near Cube: " +strCAN);
                 strCAF = Integer.toString(cubeAutoFar);
                 tAutoCubeFar.setText("Far Cube: " + strCAF);
+                lift = "not lifted";
+                mode = "";
                 popStar();
                 popCube();
                 //end all the running timer!
@@ -244,6 +246,20 @@ public class MainActivity extends Activity
                     cuteAuto.cancel();
                     cuteAuto.onFinish();
                 } // need to clear all the textView to 0 or empty!
+            }
+        });
+    }
+
+    public void selectTeam(){
+        teamNumSpin.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                teamNumberArray = getResources().getStringArray(R.array.data);
+                teamNumber = teamNumberArray[position];
+                Toast.makeText(MainActivity.this, "Team: "+teamNumberArray[position], Toast.LENGTH_SHORT).show();
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
             }
         });
     }
@@ -303,42 +319,50 @@ public class MainActivity extends Activity
         ++starDriverNear;
         strSDN = Integer.toString(starDriverNear);
         tDriverStarNear.setText("Near Star: " +strSDN);
+        insertData();
     }
     public void driverFarStar() {
         starDriverFar = starDriverFar + 2;
         strSDF = Integer.toString(starDriverFar);
         tDriverStarFar.setText("Far Star: " + strSDF);
+        insertData();
     }
     public void driverNearCube() {
         cubeDriverNear = cubeDriverNear + 2;
         strCDN = Integer.toString(cubeDriverNear);
         tDriverCubeNear.setText("Near Cube: " +strCDN);
+        insertData();
     }
     public void driverFarCube() {
         cubeDriverFar = cubeDriverFar + 4;
         strCDF = Integer.toString(cubeDriverFar);
         tDriverCubeFar.setText("Far Cube: " + strCDF);
+        insertData();
     }
     // Auto mode score counters
     public void autoNearStar() {
         ++starAutoNear;
         strSAN = Integer.toString(starAutoNear);
         tAutoStarNear.setText("Near Star: " +strSAN);
+        insertData();
     }
     public void autoFarStar() {
         starAutoFar = starAutoFar + 2;
         strSAF = Integer.toString(starAutoFar);
         tAutoStarFar.setText("Far Star: " + strSAF);
+        insertData();
     }
     public void autoNearCube() {
         cubeAutoNear = cubeAutoNear + 2;
         strCAN = Integer.toString(cubeAutoNear);
         tAutoCubeNear.setText("Near Cube: " +strCAN);
+        insertData();
     }
     public void autoFarCube() {
         cubeAutoFar = cubeAutoFar + 4;
         strCAF = Integer.toString(cubeAutoFar);
         tAutoCubeFar.setText("Far Cube: " + strCAF);
+        insertData();
     }
     public void scoreStarTally() {
         if(leftSide) {
@@ -457,8 +481,14 @@ public class MainActivity extends Activity
         lifted.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if(lifted.isChecked()) liftedGirl = true;
-                else liftedGirl = false;
+                if(lifted.isChecked()) {
+                    liftedGirl = true;
+                    lift = "lifted";
+                }
+                else {
+                    liftedGirl = false;
+                    lift = "not lifted";
+                }
                 System.out.println(liftedGirl);
             }
         });
@@ -485,13 +515,34 @@ public class MainActivity extends Activity
 
     public void startDataBase() {
         dataBaseHelper = new DataBaseHelper(MainActivity.this);
-        dataBaseHelper.getReadableDatabase();
-        dataBaseHelper.getWritableDatabase();
+        //dataBaseHelper.getReadableDatabase();
+        //dataBaseHelper.getWritableDatabase();
         File f = new File(getExternalFilesDir(null).getAbsolutePath() + File.separator + dataBaseHelper.DATABASE_NAME);// 创建文件
         if(f.exists()) {
             Toast.makeText(MainActivity.this, "Database has been created", Toast.LENGTH_SHORT).show();
             System.out.println(f);
         }
+    }
+
+    public void insertData(){
+        dataBase = dataBaseHelper.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put("teamNumber", teamNumber);
+        values.put("Mode", mode);
+        values.put("time", time);
+        values.put("SAN", strSAN);
+        values.put("SAF", strSAF);
+        values.put("SDN", strSDN);
+        values.put("SDF", strSDF);
+        values.put("CAN", strCAN);
+        values.put("CAF", strCAF);
+        values.put("CDN", strCDN);
+        values.put("CDF", strCDF);
+        values.put("lifted", lift);
+        values.put("positionX", strCX);
+        values.put("positionY", strCY);
+        dataBase.insert("teamData",null,values);
+        dataBase.close();
     }
 
     public void bTHelper(){
