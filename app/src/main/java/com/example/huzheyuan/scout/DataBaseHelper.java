@@ -16,9 +16,9 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     public final static String TEXT = "text";
     public static final String DATABASE_NAME = "teamData.db";
     public DataBaseHelper(Context context) {
-        super(context, context.getExternalFilesDir(null).getAbsolutePath()
+        super(context, context.getExternalFilesDir(null)
                 + File.separator + DATABASE_NAME,null,VERSION);
-        SQLiteDatabase.openOrCreateDatabase(context.getExternalFilesDir(null).getAbsolutePath()
+        SQLiteDatabase.openOrCreateDatabase(context.getExternalFilesDir(null)
                 + File.separator + DATABASE_NAME,null);
     }
 

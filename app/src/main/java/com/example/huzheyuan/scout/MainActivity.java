@@ -475,7 +475,7 @@ public class MainActivity extends Activity
     }
     public void excited(){ // this is a method for vibrator, which you should know how to use it!
         girlFriend.cancel();
-        girlFriend.vibrate(500);
+        girlFriend.vibrate(1000);
     }
     public void lift() {
         lifted.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
