@@ -2,36 +2,36 @@
 <resources>
     <string-array name="data">
         <item>Select_team_number</item>
-        <item>62     </item>
-        <item>62B    </item>
-        <item>62K    </item>
-        <item>62R    </item>
-        <item>62V    </item>
-        <item>62Z    </item>
-        <item>83     </item>
-        <item>224    </item>
-        <item>424B   </item>
-        <item>424D   </item>
-        <item>424R   </item>
-        <item>424W   </item>
-        <item>1138   </item>
-        <item>1138B  </item>
-        <item>1138G  </item>
-        <item>4621A  </item>
-        <item>4621B  </item>
-        <item>4621C  </item>
-        <item>5026A  </item>
-        <item>5026B  </item>
-        <item>7983F  </item>
-        <item>7983S  </item>
-        <item>7983W  </item>
-        <item>7983Y  </item>
-        <item>9917S  </item>
-        <item>19651E </item>
-        <item>19651S </item>
-        <item>19651W </item>
-        <item>93063A </item>
-        <item>98994  </item>
+        <item>20X	  </item>
+        <item>20Y	  </item>
+        <item>20Z	  </item>
+        <item>62	  </item>
+        <item>62K	  </item>
+        <item>62Z	  </item>
+        <item>83	  </item>
+        <item>404	  </item>
+        <item>404A  </item>
+        <item>404X  </item>
+        <item>409A  </item>
+        <item>510Z  </item>
+        <item>599A  </item>
+        <item>627A  </item>
+        <item>627B  </item>
+        <item>687B  </item>
+        <item>687C  </item>
+        <item>1138  </item>
+        <item>1138B</item>
+        <item>1138G</item>
+        <item>1437B</item>
+        <item>1437G</item>
+        <item>1437V</item>
+        <item>1680A</item>
+        <item>1680B</item>
+        <item>1680C</item>
+        <item>3007</item>
+        <item>4179A</item>
+        <item>4800B</item>
+        <item>4800C</item>
         <!--<item> </item>-->
         <!--<item> </item>-->
         <!--<item> </item>-->
@@ -42,36 +42,4 @@
         <!--<item> </item>-->
         <!--<item> </item>-->
     </string-array>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 </resources>

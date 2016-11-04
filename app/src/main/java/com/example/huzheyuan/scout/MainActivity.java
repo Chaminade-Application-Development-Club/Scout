@@ -22,6 +22,8 @@ import android.os.CountDownTimer;
 import android.widget.Toast;
 import tyrantgit.explosionfield.ExplosionField;
 import java.io.File;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 
 public class MainActivity extends Activity {
     RelativeLayout frame;
@@ -37,7 +39,7 @@ public class MainActivity extends Activity {
     long time;
     String[] teamNumberArray;
     int cubeAutoNear = 0,cubeAutoFar = 0,starAutoNear = 0,starAutoFar = 0;
-    int cubeDriverNear = 0,cubeDriverFar = 0,starDriverNear = 0,starDriverFar = 0;
+    int cubeDriverNear = 0,cubeDriverFar = 0,starDriverNear = 0,starDriverFar = 0,arrayPosition = 0;
     boolean leftSide = true,up = true,liftedGirl = false,autoMode = false;
     boolean visibilityStar = false,visibilityCube = false,chooseTeam = false;//Set all the variables
     CountDownTimer cuteDriver = null,cuteAuto = null;
@@ -46,21 +48,24 @@ public class MainActivity extends Activity {
     DataBaseHelper dataBaseHelper;
     SQLiteDatabase dataBase;
     Vibrator girlFriend;
-
+    AlertDialog alert = null;
+    AlertDialog.Builder builder = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        // finalize the girl GirlView, which you will understand soon... Try to delete this code!!
-        final GirlView girl = new GirlView(MainActivity.this);
-        // the explode boom is an experiment animation
-        boom = ExplosionField.attach2Window(this);
         startDataBase();
         findViews();
+    }
+    @Override
+    protected void onStart(){
+        super.onStart();
         clear();
         lift();
         selectTeam();
+        // finalize the girl GirlView, which you will understand soon... Try to delete this code!!
+        final GirlView girl = new GirlView(MainActivity.this);
         /**
          * Don't even try to make these switchers into method! And don't ask me why, think, plus
          * I've done the experiment already!
@@ -83,83 +88,79 @@ public class MainActivity extends Activity {
                 resetGirl(girl);
             }
         });
-        if(!chooseTeam){
-            bAuto.setEnabled(false);
-            bDriver.setEnabled(false);
-            Toast.makeText(MainActivity.this, "Select Team Number!", Toast.LENGTH_SHORT).show();
-        }
-        else{
-            bAuto.setOnClickListener(new View.OnClickListener() { //Auto start button
-                @Override
-                public void onClick(View v) {
-                    autoMode = true;
-                    mode = "auto";
-                    Toast.makeText(MainActivity.this, "Auto Mode Starts", Toast.LENGTH_SHORT).show();
-                    timerBug();
-                    cuteAuto = new CountDownTimer(15000, 1000) {
-                        // Auto time limits 15s
-                        public void onTick(long millisUntilFinished) {
-                            scoreStarTally();
-                            scoreCubeTally();
-                            time = millisUntilFinished / 1000;
-                            cT.setText("End: " + time);
-                            //the tallies are for counting the scoring actions ...
-                            //Then, this is the code for drawing a girlon the screen!!!
-                            girl.setOnTouchListener(new View.OnTouchListener() {
-                                @Override
-                                public boolean onTouch(View view, MotionEvent event) {
-                                    //设置妹子显示的位置, set the girl's position
-                                    girl.bitmapX = event.getX() - 36;
-                                    girl.bitmapY = event.getY() - 44;
-                                    // the only reason why I minus number from the position is you can
-                                    // try to remove it and you will know why!!!
-                                    drawGirl(girl);
-                                    return true;
-                                }
-                            });
-                        }
-                        public void onFinish(){ // on finish is a important method to know, learn it!
-                            resetGirl(girl);
-                            cT.setText("End!");
-                        }
-                    }.start(); // end of the timer
-                }
-            });
-            //Driver Mode Start, same structure and usage as auto mode
-            bDriver.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    autoMode = false;
-                    mode = "driver";
-                    Toast.makeText(MainActivity.this, "Driver Mode Starts", Toast.LENGTH_SHORT).show();
-                    timerBug();
-                    cuteDriver = new CountDownTimer(105000, 1000) { // Driver time limits 105s
-                        public void onTick(long millisUntilFinished) {
-                            time = millisUntilFinished / 1000;
-                            cT.setText("End: " + time);
-                            scoreStarTally();
-                            scoreCubeTally();
-                            girl.setOnTouchListener(new View.OnTouchListener() {
-                                @Override
-                                public boolean onTouch(View view, MotionEvent event) {
-                                    //设置妹子显示的位置
-                                    girl.bitmapX = event.getX() - 36;
-                                    girl.bitmapY = event.getY() - 44;
-                                    drawGirl(girl);
-                                    return true;
-                                }
-                            });
-                        }
-                        public void onFinish(){
-                            resetGirl(girl);
-                            cT.setText("End!");
-                        }
-                    }.start();
-                }
-            });
-        }
-        frame.addView(girl); // add a little cute girl on the screen, important!!!
+        bAuto.setOnClickListener(new View.OnClickListener() { //Auto start button
+            @Override
+            public void onClick(View v) {
+                preventRetard();
+                autoMode = true;
+                mode = "auto";
+                Toast.makeText(MainActivity.this, "Auto Mode Starts", Toast.LENGTH_SHORT).show();
+                timerBug();
+                cuteAuto = new CountDownTimer(15000, 1000) {
+                    // Auto time limits 15s
+                    public void onTick(long millisUntilFinished) {
+                        scoreStarTally();
+                        scoreCubeTally();
+                        time = millisUntilFinished / 1000;
+                        cT.setText("End: " + time);
+                        //the tallies are for counting the scoring actions ...
+                        //Then, this is the code for drawing a girlon the screen!!!
+                        girl.setOnTouchListener(new View.OnTouchListener() {
+                            @Override
+                            public boolean onTouch(View view, MotionEvent event) {
+                                //设置妹子显示的位置, set the girl's position
+                                girl.bitmapX = event.getX() - 36;
+                                girl.bitmapY = event.getY() - 44;
+                                // the only reason why I minus number from the position is you
+                                // can try to remove it and you will know why!!!
+                                drawGirl(girl);
+                                return true;
+                            }
+                        });
+                    }
+                    public void onFinish(){ // on finish is a important method to know, learn it!
+                        resetGirl(girl);
+                        cT.setText("End!");
+                    }
+                }.start(); // end of the timer
+            }
+        });
+        //Driver Mode Start, same structure and usage as auto mode
+        bDriver.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                preventRetard();
+                autoMode = false;
+                mode = "driver";
+                Toast.makeText(MainActivity.this, "Driver Mode Starts", Toast.LENGTH_SHORT).show();
+                timerBug();
+                cuteDriver = new CountDownTimer(105000, 1000) { // Driver time limits 105s
+                    public void onTick(long millisUntilFinished) {
+                        time = millisUntilFinished / 1000;
+                        cT.setText("End: " + time);
+                        scoreStarTally();
+                        scoreCubeTally();
+                        girl.setOnTouchListener(new View.OnTouchListener() {
+                            @Override
+                            public boolean onTouch(View view, MotionEvent event) {
+                                //设置妹子显示的位置
+                                girl.bitmapX = event.getX() - 36;
+                                girl.bitmapY = event.getY() - 44;
+                                drawGirl(girl);
+                                return true;
+                            }
+                        });
+                    }
+                    public void onFinish(){
+                        resetGirl(girl);
+                        cT.setText("End!");
+                    }
+                }.start();
+            }
+        });
+    frame.addView(girl); // add a little cute girl on the screen, important!!!
     }
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////
     // Here is all the methods I am using!!!
     // Try to make it explicit ...
@@ -248,14 +249,28 @@ public class MainActivity extends Activity {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 teamNumberArray = getResources().getStringArray(R.array.data);
                 teamNumber = teamNumberArray[position];
-                if(position == 0) chooseTeam = false;
-                else chooseTeam = true;
+                arrayPosition = position;
                 Toast.makeText(MainActivity.this, "Team: "+teamNumberArray[position], Toast.LENGTH_SHORT).show();
             }
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
             }
         });
+    }
+    public void preventRetard(){
+        if(arrayPosition == 0){
+            alert = null;
+            builder = new AlertDialog.Builder(MainActivity.this);
+            alert = builder.setTitle("Alarm：")
+                    .setMessage("Please choose team number!")
+                    .setPositiveButton("Sorry, Please forgive me", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            Toast.makeText(MainActivity.this, "You are forgiven!", Toast.LENGTH_SHORT).show();
+                        }
+                    }).create();             //创建AlertDialog对象
+            alert.show();                    //显示对话框
+        }
     }
     public void drawGirl(GirlView girl) {
         mapBoundary(girl);
