@@ -137,7 +137,7 @@
         android:layout_above="@+id/fieldLayout"
         android:layout_alignParentLeft="true"
         android:text="Far Zone"
-        android:textAppearance="?android:attr/textAppearanceMedium"/>
+        android:textAppearance="?android:attr/textAppearanceMedium" />
 
     <Button
         android:id = "@+id/leftNear"
