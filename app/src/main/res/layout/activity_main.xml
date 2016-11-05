@@ -168,18 +168,6 @@
         android:layout_alignParentEnd="true">
 
         <Button
-            android:id="@+id/btnDrive"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text = "Driver"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:textAllCaps="false"
-            android:layout_alignParentRight="true"
-            android:background="@null"
-            android:textColor="#01579B"
-            />
-
-        <Button
             android:id="@+id/btnAuto"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -194,6 +182,7 @@
             android:layout_toLeftOf="@+id/btnDrive" />
 
         <TextView
+            android:layout_marginRight="10dp"
             android:id = "@+id/textDriverStarNear"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -202,19 +191,7 @@
             android:textColor="#004D40"
             android:gravity="start|center"
             android:layout_below="@+id/btnDrive"
-            android:layout_alignStart="@+id/textDriverStarFar"/>
-
-        <TextView
-            android:id = "@+id/textDriverCubeNear"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Near Cube:"
-            android:textAppearance="?android:attr/textAppearanceSmall"
-            android:textColor="#004D40"
-            android:gravity="start|center"
-            android:layout_below="@+id/textDriverStarFar"
-            android:layout_alignParentRight="true"
-            />
+            android:layout_toEndOf="@+id/textAutoCubeNear" />
 
         <TextView
             android:id = "@+id/textDriverCubeFar"
@@ -224,9 +201,9 @@
             android:textAppearance="?android:attr/textAppearanceSmall"
             android:textColor="#004D40"
             android:gravity="start|center"
-            android:layout_alignStart="@+id/textDriverCubeNear"
             android:layout_alignParentRight="false"
-            android:layout_below="@+id/textDriverCubeNear" />
+            android:layout_below="@+id/textDriverCubeNear"
+            android:layout_alignStart="@+id/textDriverCubeNear" />
 
         <TextView
             android:id="@+id/textAutoStarNear"
@@ -281,7 +258,30 @@
             android:textColor="#004D40"
             android:gravity="start|center"
             android:layout_below="@+id/textDriverStarNear"
-            android:layout_alignStart="@+id/textDriverCubeNear" />
+            android:layout_toEndOf="@+id/textAutoCubeNear" />
+
+        <TextView
+            android:id = "@+id/textDriverCubeNear"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Near Cube:"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:textColor="#004D40"
+            android:gravity="start|center"
+            android:layout_below="@+id/textDriverStarFar"
+            android:layout_toEndOf="@+id/textAutoCubeNear" />
+
+        <Button
+            android:id="@+id/btnDrive"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text = "Driver"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textAllCaps="false"
+            android:background="@null"
+            android:textColor="#01579B"
+            android:layout_alignParentTop="true"
+            android:layout_alignEnd="@+id/textDriverCubeNear" />
 
     </RelativeLayout>
 
