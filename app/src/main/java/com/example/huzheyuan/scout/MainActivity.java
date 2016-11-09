@@ -91,7 +91,6 @@ public class MainActivity extends Activity {
         bAuto.setOnClickListener(new View.OnClickListener() { //Auto start button
             @Override
             public void onClick(View v) {
-                preventRetard();
                 autoMode = true;
                 mode = "auto";
                 Toast.makeText(MainActivity.this, "Auto Mode Starts", Toast.LENGTH_SHORT).show();
@@ -123,13 +122,13 @@ public class MainActivity extends Activity {
                         cT.setText("End!");
                     }
                 }.start(); // end of the timer
+                preventRetard();
             }
         });
         //Driver Mode Start, same structure and usage as auto mode
         bDriver.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                preventRetard();
                 autoMode = false;
                 mode = "driver";
                 Toast.makeText(MainActivity.this, "Driver Mode Starts", Toast.LENGTH_SHORT).show();
@@ -156,6 +155,7 @@ public class MainActivity extends Activity {
                         cT.setText("End!");
                     }
                 }.start();
+                preventRetard();
             }
         });
     frame.addView(girl); // add a little cute girl on the screen, important!!!
@@ -231,14 +231,7 @@ public class MainActivity extends Activity {
                 popStar();
                 popCube();
                 //end all the running timer!
-                if(cuteDriver != null){
-                    cuteDriver.cancel();
-                    cuteDriver.onFinish();
-                }
-                if (cuteAuto != null){
-                    cuteAuto.cancel();
-                    cuteAuto.onFinish();
-                } // need to clear all the textView to 0 or empty!
+                timerBug(); // need to clear all the textView to 0 or empty!
            }
         });
     }
@@ -258,6 +251,7 @@ public class MainActivity extends Activity {
     }
     public void preventRetard(){
         if(arrayPosition == 0){
+            timerBug();
             alert = null;
             builder = new AlertDialog.Builder(MainActivity.this);
             alert = builder.setTitle("Alarm：")
