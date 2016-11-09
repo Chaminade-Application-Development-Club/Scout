@@ -1,4 +1,5 @@
 package com.example.huzheyuan.scout;
+
 import android.app.Service;
 import android.content.ContentValues;
 import android.database.sqlite.SQLiteDatabase;
@@ -47,8 +48,9 @@ public class MainActivity extends Activity {
     DataBaseHelper dataBaseHelper;
     SQLiteDatabase dataBase;
     Vibrator girlFriend;
-    AlertDialog alert;
-    AlertDialog.Builder builder;
+    AlertDialog alert = null;
+    AlertDialog.Builder builder = null;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -89,6 +91,7 @@ public class MainActivity extends Activity {
         bAuto.setOnClickListener(new View.OnClickListener() { //Auto start button
             @Override
             public void onClick(View v) {
+                preventRetard();
                 autoMode = true;
                 mode = "auto";
                 Toast.makeText(MainActivity.this, "Auto Mode Starts", Toast.LENGTH_SHORT).show();
@@ -120,13 +123,13 @@ public class MainActivity extends Activity {
                         cT.setText("End!");
                     }
                 }.start(); // end of the timer
-                preventIdiot();
             }
         });
         //Driver Mode Start, same structure and usage as auto mode
         bDriver.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                preventRetard();
                 autoMode = false;
                 mode = "driver";
                 Toast.makeText(MainActivity.this, "Driver Mode Starts", Toast.LENGTH_SHORT).show();
@@ -153,7 +156,6 @@ public class MainActivity extends Activity {
                         cT.setText("End!");
                     }
                 }.start();
-                preventIdiot();
             }
         });
     frame.addView(girl); // add a little cute girl on the screen, important!!!
@@ -190,7 +192,8 @@ public class MainActivity extends Activity {
         girlFriend = (Vibrator) getSystemService(Service.VIBRATOR_SERVICE);
     }
     public void clear() // Highly emergency issues right here!!! The clear method is broken and not function too properly.
-    {//It need to be rewritten and clarified!!!
+    //It need to be rewritten and clarified!!!
+    {
         bClear.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -239,20 +242,6 @@ public class MainActivity extends Activity {
            }
         });
     }
-    public void preventIdiot(){
-        builder = new AlertDialog.Builder(MainActivity.this);
-        builder.setTitle("Warning").setMessage("Please select team Number");
-        builder.setPositiveButton("I promise", new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int which){
-                dialog.cancel();
-            }
-        });
-        if(arrayPosition == 0) {
-            alert = builder.create();
-            alert.show();
-            timerBug();
-        }
-    }
     public void selectTeam(){
         teamNumSpin.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -266,6 +255,21 @@ public class MainActivity extends Activity {
             public void onNothingSelected(AdapterView<?> parent) {
             }
         });
+    }
+    public void preventRetard(){
+        if(arrayPosition == 0){
+            alert = null;
+            builder = new AlertDialog.Builder(MainActivity.this);
+            alert = builder.setTitle("Alarm：")
+                    .setMessage("Please choose team number!")
+                    .setPositiveButton("Sorry, Please forgive me", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            Toast.makeText(MainActivity.this, "You are forgiven!", Toast.LENGTH_SHORT).show();
+                        }
+                    }).create();             //创建AlertDialog对象
+            alert.show();                    //显示对话框
+        }
     }
     public void drawGirl(GirlView girl) {
         mapBoundary(girl);
@@ -433,6 +437,7 @@ public class MainActivity extends Activity {
                     return true;
                 }
             });
+
             nearRightScore.setOnLongClickListener(new View.OnLongClickListener() {
                 @Override
                 public boolean onLongClick(View v) {
@@ -513,8 +518,8 @@ public class MainActivity extends Activity {
             cuteAuto.cancel();
             cuteAuto.onFinish();
         }
-    }//the if statements here are for avoiding multiple countdown timer bug!!!
-    // start the timer for auto
+    }// the if statements here are for avoiding multiple countdown timer bug!!!
+    //start the timer for auto
     public void startDataBase() {
         dataBaseHelper = new DataBaseHelper(MainActivity.this);
         //dataBaseHelper.getReadableDatabase();
