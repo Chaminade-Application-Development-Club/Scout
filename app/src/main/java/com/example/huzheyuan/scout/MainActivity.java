@@ -57,6 +57,8 @@ public class MainActivity extends Activity {
         setContentView(R.layout.activity_main);
         startDataBase();
         findViews();
+        sSide.setChecked(false);
+        sPoint.setChecked(false);
     }
     @Override
     protected void onStart(){
@@ -70,7 +72,6 @@ public class MainActivity extends Activity {
          * Don't even try to make these switchers into method! And don't ask me why, think, plus
          * I've done the experiment already!
          */
-        sSide.setChecked(false);
         sSide.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -79,7 +80,7 @@ public class MainActivity extends Activity {
                 resetGirl(girl);
             }
         });
-        sPoint.setChecked(false);
+
         sPoint.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -119,6 +120,7 @@ public class MainActivity extends Activity {
                     }
                     public void onFinish(){ // on finish is a important method to know, learn it!
                         resetGirl(girl);
+                        girl.setOnTouchListener(null);
                         cT.setText("End!");
                     }
                 }.start(); // end of the timer
@@ -152,6 +154,7 @@ public class MainActivity extends Activity {
                     }
                     public void onFinish(){
                         resetGirl(girl);
+                        girl.setOnTouchListener(null);
                         cT.setText("End!");
                     }
                 }.start();
