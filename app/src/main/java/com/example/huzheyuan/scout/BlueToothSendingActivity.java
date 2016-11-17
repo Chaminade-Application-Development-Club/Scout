@@ -103,10 +103,10 @@ public class BlueToothSendingActivity extends AppCompatActivity {
             Toast.makeText(this,"No Bluetooth Available",Toast.LENGTH_SHORT).show();
         }
         if(!bluetoothAdapter.isEnabled()){ //弹出对话框提示用户打开
-            Intent enableBluetooth = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
-            startActivityForResult(enableBluetooth, 0);
-//            Intent enabler = new Intent(BluetoothAdapter.ACTION_REQUEST_DISCOVERABLE);
-//            startActivityForResult(enabler,0);
+//            Intent enableBluetooth = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
+//            startActivityForResult(enableBluetooth, 0);
+            Intent enabler = new Intent(BluetoothAdapter.ACTION_REQUEST_DISCOVERABLE);
+            startActivityForResult(enabler,0);
 
 //            Toast.makeText(this,"Scanning",Toast.LENGTH_SHORT).show();
 //            bluetoothAdapter.startDiscovery();
@@ -114,8 +114,8 @@ public class BlueToothSendingActivity extends AppCompatActivity {
 //            registerReceiver(broadcastReceiver, bTFound);
         }
         else{
-//            Intent enabler = new Intent(BluetoothAdapter.ACTION_REQUEST_DISCOVERABLE);
-//            startActivityForResult(enabler,0);
+            Intent enabler = new Intent(BluetoothAdapter.ACTION_REQUEST_DISCOVERABLE);
+            startActivityForResult(enabler,0);
             Toast.makeText(this,"Bluetooth On!",Toast.LENGTH_SHORT).show();
 //            bluetoothAdapter.startDiscovery();
 //            IntentFilter bTFound = new IntentFilter(BluetoothDevice.ACTION_FOUND);
