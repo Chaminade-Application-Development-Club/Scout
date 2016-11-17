@@ -2,6 +2,7 @@ package com.example.huzheyuan.scout;
 
 import android.app.Service;
 import android.content.ContentValues;
+import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.os.Bundle;
@@ -13,6 +14,7 @@ import android.widget.Button;
 import android.app.Activity;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
@@ -30,7 +32,7 @@ public class MainActivity extends Activity {
     TextView cX,cY,cT,tDriverStarNear,tDriverStarFar,tDriverCubeNear,tDriverCubeFar;
     TextView tAutoStarNear,tAutoStarFar, tAutoCubeNear,tAutoCubeFar ;
     ImageView starPic,cubePic;
-    Button nearRightScore,farRightScore,nearLeftScore,farLeftScore,bAuto,bDriver,bClear;
+    Button nearRightScore,farRightScore,nearLeftScore,farLeftScore,bAuto,bDriver,bClear,bTStart;
     Switch sSide,sPoint;
     Spinner teamNumSpin;
     CheckBox lifted;
@@ -59,6 +61,12 @@ public class MainActivity extends Activity {
         findViews();
         sSide.setChecked(false);
         sPoint.setChecked(false);
+        bTStart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this,BlueToothSendingActivity.class));
+            }
+        });
     }
     @Override
     protected void onStart(){
@@ -187,6 +195,7 @@ public class MainActivity extends Activity {
         farRightScore = (Button) findViewById(R.id.rightFar);
         nearLeftScore = (Button) findViewById(R.id.leftNear);
         farLeftScore = (Button) findViewById(R.id.leftFar);
+        bTStart = (Button) findViewById(R.id.btnBt);
         sSide = (Switch) findViewById(R.id.stchSide);
         sPoint = (Switch) findViewById(R.id.stchPoint);
         teamNumSpin = (Spinner) findViewById(R.id.spinTeamNum);

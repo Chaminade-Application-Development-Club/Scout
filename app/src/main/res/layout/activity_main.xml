@@ -1,18 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:tools="http://schemas.android.com/tools"
     android:layout_height="wrap_content"
     android:layout_width="wrap_content"
-    xmlns:android="http://schemas.android.com/apk/res/android">
-
-    <TextView
-        android:id = "@+id/countDown"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:text="Please Start"
-        android:padding="10dp"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        />
+    android:fitsSystemWindows="true"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <CheckBox
         android:id = "@+id/Checklifted"
@@ -42,23 +34,14 @@
         android:src="@mipmap/cube"
         android:visibility="invisible"/>
 
-    <Spinner
-        android:id = "@+id/spinTeamNum"
-        android:layout_width="210dp"
-        android:layout_height="wrap_content"
-        android:padding="10dp"
-        android:entries="@array/data"
-        android:gravity="center"
-        android:dropDownSelector="@color/colorPrimary">
 
-    </Spinner>
 
     <Switch
         android:id = "@+id/stchSide"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_below="@+id/countDown"
+        android:layout_below="@+id/toolbar"
         android:background="@null"
         android:hint="Swith Sides"
         android:textOff="Left"
@@ -148,23 +131,11 @@
         android:layout_above="@+id/fieldLayout"
         android:layout_marginLeft="200dp" />
 
-    <Button
-        android:id="@+id/btnClear"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text = "Submit"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:textAllCaps="false"
-        android:background="@null"
-        android:textColor="#01579B"
-        android:layout_alignBottom="@+id/stchPoint"
-        android:layout_alignParentStart="true" />
-
     <RelativeLayout
+        android:layout_below="@+id/toolbar"
         android:layout_width="180dp"
         android:layout_height="wrap_content"
         android:id="@+id/relativeLayout"
-        android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true">
 
         <Button
@@ -284,5 +255,60 @@
             android:layout_alignEnd="@+id/textDriverCubeNear" />
 
     </RelativeLayout>
+
+    <Button
+        android:id="@+id/btnClear"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text = "Save"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textAllCaps="false"
+        android:background="@null"
+        android:textColor="#01579B"
+        android:layout_alignBottom="@+id/stchPoint"
+        android:layout_alignParentStart="true" />
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="?actionBarSize"
+        android:background="?attr/colorPrimary"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true">
+
+        <Spinner
+            android:id = "@+id/spinTeamNum"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity = "start"
+            android:padding="10dp"
+            android:entries="@array/data"
+            android:gravity="center_vertical|start"
+            android:dropDownSelector="@color/colorPrimary">
+        </Spinner>
+
+        <TextView
+            android:id = "@+id/countDown"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity = "center"
+            android:text="Please Start"
+            android:padding="10dp"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:layout_alignParentTop="false"
+            android:layout_centerHorizontal="false" />
+
+        <Button
+            android:visibility="visible"
+            android:id="@+id/btnBt"
+            android:layout_gravity = "end"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Upload"
+            android:gravity="center"
+            android:background="@null"
+            android:clickable="true" />
+    </android.support.v7.widget.Toolbar>
 
 </RelativeLayout>
