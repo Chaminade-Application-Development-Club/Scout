@@ -10,7 +10,8 @@ import java.util.UUID;
 public class ServerThread extends Thread{
     private BluetoothServerSocket bluetoothServerSocket;
     private BluetoothAdapter bluetoothAdapter;
-    private static final UUID MY_UUID = UUID.fromString("0000110E-0000-1000-8000-00805F9B34FB");
+    private static final String NAME = "bTServer";
+    private static final UUID MY_UUID = UUID.fromString("0x1106");
     public ServerThread(){
         BluetoothServerSocket tmp = null;
         try{
