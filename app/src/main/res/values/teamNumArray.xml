@@ -2,36 +2,36 @@
 <resources>
     <string-array name="data">
         <item>Select_team_number</item>
-        <item>20X	  </item>
-        <item>20Y	  </item>
-        <item>20Z	  </item>
-        <item>62	  </item>
-        <item>62K	  </item>
-        <item>62Z	  </item>
-        <item>83	  </item>
-        <item>404	  </item>
-        <item>404A  </item>
-        <item>404X  </item>
-        <item>409A  </item>
-        <item>510Z  </item>
-        <item>599A  </item>
-        <item>627A  </item>
-        <item>627B  </item>
-        <item>687B  </item>
-        <item>687C  </item>
-        <item>1138  </item>
-        <item>1138B</item>
-        <item>1138G</item>
-        <item>1437B</item>
-        <item>1437G</item>
-        <item>1437V</item>
-        <item>1680A</item>
-        <item>1680B</item>
-        <item>1680C</item>
-        <item>3007</item>
-        <item>4179A</item>
-        <item>4800B</item>
-        <item>4800C</item>
+        <item>20X</item>
+        <item>20Y</item>
+        <item>20Z</item>
+        <item>83</item>
+        <item>404</item>
+        <item>404A</item>
+        <item>409A</item>
+        <item>510B</item>
+        <item>510Z</item>
+        <item>599A</item>
+        <item>599B</item>
+        <item>628A</item>
+        <item>628B</item>
+        <item>1034A</item>
+        <item>1034B	</item>
+        <item>1066A	</item>
+        <item>1066B	</item>
+        <item>1138</item>
+        <item>1138B	</item>
+        <item>1138G	</item>
+        <item>1437G	</item>
+        <item>1437V	</item>
+        <item>1469A	</item>
+        <item>1469B	</item>
+        <item>1508A	</item>
+        <item>3671E	</item>
+        <item>3671F</item>
+        <item>3671G	</item>
+        <item>4642V	</item>
+        <item>4642W	</item>
         <!--<item> </item>-->
         <!--<item> </item>-->
         <!--<item> </item>-->
@@ -42,4 +42,48 @@
         <!--<item> </item>-->
         <!--<item> </item>-->
     </string-array>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 </resources>
