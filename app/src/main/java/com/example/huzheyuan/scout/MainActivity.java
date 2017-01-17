@@ -22,7 +22,6 @@ import android.widget.Switch;
 import android.widget.TextView;
 import android.os.CountDownTimer;
 import android.widget.Toast;
-import tyrantgit.explosionfield.ExplosionField;
 import java.io.File;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -45,7 +44,6 @@ public class MainActivity extends Activity {
     boolean leftSide = true,up = true,liftedGirl = false,autoMode = false;
     boolean visibilityStar = false,visibilityCube = false,chooseTeam = false;//Set all the variables
     CountDownTimer cuteDriver = null,cuteAuto = null;
-    ExplosionField boom;
     DataBaseContext dBContext;
     DataBaseHelper dataBaseHelper;
     SQLiteDatabase dataBase;
@@ -64,7 +62,7 @@ public class MainActivity extends Activity {
         bTStart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this,BlueToothSendingActivity.class));
+                startActivity(new Intent(MainActivity.this,QRcode.class));
             }
         });
     }

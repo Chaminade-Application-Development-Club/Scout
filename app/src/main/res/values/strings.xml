@@ -2,4 +2,5 @@
     <string name="app_name">Scout</string>
     <string name="title_activity_entry">Scout</string>
     <string name="title_activity_blue_tooth_sending">BlueToothSendingActivity</string>
+    <string name="title_activity_qrcode">QRcode</string>
 </resources>
