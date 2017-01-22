@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context="com.example.huzheyuan.scout.BlueToothSendingActivity">
+    tools:context="com.example.huzheyuan.scout.bluetoothVEX.BlueToothSendingActivity">
 
     <include layout="@layout/content_blue_tooth_sending" />
 

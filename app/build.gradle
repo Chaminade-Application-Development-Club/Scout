@@ -1,5 +1,6 @@
 apply plugin: 'com.android.application'
-
+apply plugin: 'realm-android'
+apply plugin: 'com.jakewharton.butterknife'
 android {
     compileSdkVersion 25
     buildToolsVersion "25"
@@ -28,4 +29,5 @@ dependencies {
     compile 'com.android.support:design:25.1.0'
     testCompile 'junit:junit:4.12'
     compile files('src/main/java/core-3.3.0.jar')
+    compile 'com.jakewharton:butterknife:8.4.0'
 }

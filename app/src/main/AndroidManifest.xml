@@ -14,11 +14,11 @@
         android:icon="@mipmap/logo2"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme.ActionBar.Transparent">
+        android:theme="@style/AppTheme">
         <activity
             android:name=".EntryActivity"
             android:label="@string/title_activity_entry"
-            android:theme="@style/AppTheme.ActionBar.Transparent">
+            android:theme="@style/AppTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -34,7 +34,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".BlueToothSendingActivity"
+            android:name=".bluetoothVEX.BlueToothSendingActivity"
             android:label="@string/title_activity_blue_tooth_sending"
             android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity

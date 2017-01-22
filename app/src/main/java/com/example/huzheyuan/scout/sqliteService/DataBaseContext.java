@@ -1,4 +1,4 @@
-package com.example.huzheyuan.scout;
+package com.example.huzheyuan.scout.sqliteService;
 
 import android.content.ContextWrapper;
 import java.io.File;
@@ -7,6 +7,8 @@ import android.database.DatabaseErrorHandler;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteDatabase.CursorFactory;
 import android.util.Log;
+
+import com.example.huzheyuan.scout.MainActivity;
 
 /**
  * This is a class for creating database on SD card, it is necessary to create file on the SD card!

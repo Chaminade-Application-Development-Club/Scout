@@ -4,7 +4,6 @@ import android.app.Service;
 import android.content.ContentValues;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteOpenHelper;
 import android.os.Bundle;
 import android.os.Vibrator;
 import android.view.MotionEvent;
@@ -14,7 +13,6 @@ import android.widget.Button;
 import android.app.Activity;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
@@ -25,6 +23,9 @@ import android.widget.Toast;
 import java.io.File;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+
+import com.example.huzheyuan.scout.sqliteService.DataBaseContext;
+import com.example.huzheyuan.scout.sqliteService.DataBaseHelper;
 
 public class MainActivity extends Activity {
     RelativeLayout frame;

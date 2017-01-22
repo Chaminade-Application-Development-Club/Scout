@@ -1,4 +1,4 @@
-package com.example.huzheyuan.scout;
+package com.example.huzheyuan.scout.bluetoothVEX;
 
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothServerSocket;

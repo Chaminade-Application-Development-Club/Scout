@@ -1,4 +1,4 @@
-package com.example.huzheyuan.scout;
+package com.example.huzheyuan.scout.bluetoothVEX;
 
 import android.Manifest;
 import android.bluetooth.BluetoothAdapter;
@@ -11,17 +11,17 @@ import android.content.IntentFilter;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
+
+import com.example.huzheyuan.scout.R;
 
 import java.util.ArrayList;
 import java.util.Set;
@@ -91,10 +91,12 @@ public class BlueToothSendingActivity extends AppCompatActivity {
     @Override
     protected void onDestroy(){
         super.onDestroy();
-        if(bluetoothAdapter.isDiscovering()){
-            System.out.println(bluetoothAdapter.isDiscovering());
-            bluetoothAdapter.cancelDiscovery();
-            System.out.println(bluetoothAdapter.isDiscovering());
+        if(bluetoothAdapter != null){
+            if(bluetoothAdapter.isDiscovering()){
+                System.out.println(bluetoothAdapter.isDiscovering());
+                bluetoothAdapter.cancelDiscovery();
+                System.out.println(bluetoothAdapter.isDiscovering());
+            }
         }
         this.unregisterReceiver(broadcastReceiver);
     }

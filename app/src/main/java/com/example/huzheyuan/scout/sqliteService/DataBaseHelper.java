@@ -1,9 +1,11 @@
-package com.example.huzheyuan.scout;
+package com.example.huzheyuan.scout.sqliteService;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
+
+import com.example.huzheyuan.scout.MainActivity;
 
 import java.io.File;
 
