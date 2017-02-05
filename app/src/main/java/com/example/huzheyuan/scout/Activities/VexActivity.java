@@ -1,11 +1,14 @@
-package com.example.huzheyuan.scout;
+package com.example.huzheyuan.scout.Activities;
 
 import android.app.Service;
-import android.content.ContentValues;
+//import android.content.ContentValues;
+import android.content.Context;
 import android.content.Intent;
-import android.database.sqlite.SQLiteDatabase;
+//import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.os.Vibrator;
+import android.support.design.widget.Snackbar;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AdapterView;
@@ -24,11 +27,17 @@ import java.io.File;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 
-import com.example.huzheyuan.scout.sqliteService.DataBaseContext;
-import com.example.huzheyuan.scout.sqliteService.DataBaseHelper;
+import com.example.huzheyuan.scout.R;
+import com.example.huzheyuan.scout.realmService.VexStarRealm;
+//import com.example.huzheyuan.scout.sqliteService.DataBaseContext;
+//import com.example.huzheyuan.scout.sqliteService.DataBaseHelper;
 
-public class MainActivity extends Activity {
-    RelativeLayout frame;
+import io.realm.Realm;
+import io.realm.RealmConfiguration;
+import static android.content.ContentValues.TAG;
+
+public class VexActivity extends Activity {
+    RelativeLayout frame, mainLayout;
     TextView cX,cY,cT,tDriverStarNear,tDriverStarFar,tDriverCubeNear,tDriverCubeFar;
     TextView tAutoStarNear,tAutoStarFar, tAutoCubeNear,tAutoCubeFar ;
     ImageView starPic,cubePic;
@@ -42,13 +51,16 @@ public class MainActivity extends Activity {
     String[] teamNumberArray;
     int cubeAutoNear = 0,cubeAutoFar = 0,starAutoNear = 0,starAutoFar = 0;
     int cubeDriverNear = 0,cubeDriverFar = 0,starDriverNear = 0,starDriverFar = 0,arrayPosition = 0;
-    boolean leftSide = true,up = true,liftedGirl = false,autoMode = false;
+    boolean leftSide = true,up = true,liftedIcon = false,autoMode = false;
     boolean visibilityStar = false,visibilityCube = false,chooseTeam = false;//Set all the variables
     CountDownTimer cuteDriver = null,cuteAuto = null;
-    DataBaseContext dBContext;
-    DataBaseHelper dataBaseHelper;
-    SQLiteDatabase dataBase;
-    Vibrator girlFriend;
+//    DataBaseContext dBContext;
+//    DataBaseHelper dataBaseHelper;
+//    SQLiteDatabase dataBase;
+    Realm realm;
+    Vibrator vibrator;
+    // "Vibrator" is a default/traditional name of
+    // the api class written by brilliant Google programmers
     AlertDialog alert = null;
     AlertDialog.Builder builder = null;
 
@@ -56,14 +68,14 @@ public class MainActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        startDataBase();
+//        startDataBase();
         findViews();
         sSide.setChecked(false);
         sPoint.setChecked(false);
         bTStart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this,QRcode.class));
+                startActivity(new Intent(VexActivity.this,QRcodeActivity.class));
             }
         });
     }
@@ -73,18 +85,19 @@ public class MainActivity extends Activity {
         clear();
         lift();
         selectTeam();
-        // finalize the girl GirlView, which you will understand soon... Try to delete this code!!
-        final GirlView girl = new GirlView(MainActivity.this);
+        // finalize the icon iconView, which you will understand soon... Try to delete this code!!
+        final IconView iconView = new IconView(VexActivity.this);
         /**
          * Don't even try to make these switchers into method! And don't ask me why, think, plus
          * I've done the experiment already!
          */
+        openOrCreateRealm(this);
         sSide.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) leftSide = false;
                 else leftSide = true;
-                resetGirl(girl);
+                resetIcon(iconView);
             }
         });
 
@@ -93,7 +106,7 @@ public class MainActivity extends Activity {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if(isChecked) up = false;
                 else up = true;
-                resetGirl(girl);
+                resetIcon(iconView);
             }
         });
         bAuto.setOnClickListener(new View.OnClickListener() { //Auto start button
@@ -101,7 +114,7 @@ public class MainActivity extends Activity {
             public void onClick(View v) {
                 autoMode = true;
                 mode = "auto";
-                Toast.makeText(MainActivity.this, "Auto Mode Starts", Toast.LENGTH_SHORT).show();
+                Toast.makeText(VexActivity.this, "Auto Mode Starts", Toast.LENGTH_SHORT).show();
                 timerBug();
                 cuteAuto = new CountDownTimer(15000, 1000) {
                     // Auto time limits 15s
@@ -111,27 +124,27 @@ public class MainActivity extends Activity {
                         time = millisUntilFinished / 1000;
                         cT.setText("End: " + time);
                         //the tallies are for counting the scoring actions ...
-                        //Then, this is the code for drawing a girlon the screen!!!
-                        girl.setOnTouchListener(new View.OnTouchListener() {
+                        //Then, this is the code for drawing a icon on the screen!!!
+                        iconView.setOnTouchListener(new View.OnTouchListener() {
                             @Override
                             public boolean onTouch(View view, MotionEvent event) {
-                                //设置妹子显示的位置, set the girl's position
-                                girl.bitmapX = event.getX() - 36;
-                                girl.bitmapY = event.getY() - 44;
-                                // the only reason why I minus number from the position is you
-                                // can try to remove it and you will know why!!!
-                                drawGirl(girl);
-                                return true;
+                                //设置妹子显示的位置, set the icon's position
+                                iconView.bitmapX = event.getX() - 36;
+                                iconView.bitmapY = event.getY() - 44;
+                                // the only reason why I minus number from the position is ...
+                                // you can try to remove it and you will know why!!!
+                                drawIcon(iconView);
+                                return true; // you have to return true here >_<
                             }
                         });
                     }
                     public void onFinish(){ // on finish is a important method to know, learn it!
-                        resetGirl(girl);
-                        girl.setOnTouchListener(null);
+                        resetIcon(iconView);
+                        iconView.setOnTouchListener(null);
                         cT.setText("End!");
                     }
                 }.start(); // end of the timer
-                preventRetard();
+                preventMoron(); // not being offensive
             }
         });
         //Driver Mode Start, same structure and usage as auto mode
@@ -140,7 +153,7 @@ public class MainActivity extends Activity {
             public void onClick(View v) {
                 autoMode = false;
                 mode = "driver";
-                Toast.makeText(MainActivity.this, "Driver Mode Starts", Toast.LENGTH_SHORT).show();
+                Toast.makeText(VexActivity.this, "Driver Mode Starts", Toast.LENGTH_SHORT).show();
                 timerBug();
                 cuteDriver = new CountDownTimer(105000, 1000) { // Driver time limits 105s
                     public void onTick(long millisUntilFinished) {
@@ -148,27 +161,34 @@ public class MainActivity extends Activity {
                         cT.setText("End: " + time);
                         scoreStarTally();
                         scoreCubeTally();
-                        girl.setOnTouchListener(new View.OnTouchListener() {
+                        iconView.setOnTouchListener(new View.OnTouchListener() {
                             @Override
                             public boolean onTouch(View view, MotionEvent event) {
                                 //设置妹子显示的位置
-                                girl.bitmapX = event.getX() - 36;
-                                girl.bitmapY = event.getY() - 44;
-                                drawGirl(girl);
+                                iconView.bitmapX = event.getX() - 36;
+                                iconView.bitmapY = event.getY() - 44;
+                                drawIcon(iconView);
                                 return true;
                             }
                         });
                     }
                     public void onFinish(){
-                        resetGirl(girl);
-                        girl.setOnTouchListener(null);
+                        resetIcon(iconView);
+                        iconView.setOnTouchListener(null);
                         cT.setText("End!");
                     }
                 }.start();
-                preventRetard();
+                preventMoron();
             }
         });
-    frame.addView(girl); // add a little cute girl on the screen, important!!!
+    frame.addView(iconView); // add a little cute icon on the screen, important!!!
+    }
+
+    @Override
+    public void onDestroy(){
+        super.onDestroy();
+//        dataBase.close(); // plz shut down everything before you leave!
+        realm.close();
     }
 ////////////////////////////////////////////////////////////////////////////////////////////////////
     // Here is all the methods I am using!!!
@@ -200,7 +220,8 @@ public class MainActivity extends Activity {
         teamNumSpin = (Spinner) findViewById(R.id.spinTeamNum);
         lifted = (CheckBox) findViewById(R.id.Checklifted);
         frame = (RelativeLayout) findViewById(R.id.fieldLayout);
-        girlFriend = (Vibrator) getSystemService(Service.VIBRATOR_SERVICE);
+        mainLayout = (RelativeLayout) findViewById(R.id.vexMainRLayout);
+        vibrator = (Vibrator) getSystemService(Service.VIBRATOR_SERVICE);
     }
     public void clear() // Highly emergency issues right here!!! The clear method is broken and not function too properly.
     //It need to be rewritten and clarified!!!
@@ -216,7 +237,7 @@ public class MainActivity extends Activity {
                 cubeDriverFar = 0;
                 starDriverNear = 0;
                 starDriverFar = 0;
-                liftedGirl = false;
+                liftedIcon = false;
                 visibilityStar = false;
                 visibilityCube = false;
                 teamNumSpin.setSelection(0);
@@ -253,78 +274,78 @@ public class MainActivity extends Activity {
                 teamNumberArray = getResources().getStringArray(R.array.data);
                 teamNumber = teamNumberArray[position];
                 arrayPosition = position;
-                Toast.makeText(MainActivity.this, "Team: "+teamNumberArray[position], Toast.LENGTH_SHORT).show();
+                Toast.makeText(VexActivity.this, "Team: "+teamNumberArray[position], Toast.LENGTH_SHORT).show();
             }
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
             }
         });
     }
-    public void preventRetard(){
+    public void preventMoron(){
         if(arrayPosition == 0){
             timerBug();
             alert = null;
-            builder = new AlertDialog.Builder(MainActivity.this);
+            builder = new AlertDialog.Builder(VexActivity.this);
             alert = builder.setTitle("Alarm：")
                     .setMessage("Please choose team number!")
                     .setPositiveButton("Sorry, Please forgive me", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
-                            Toast.makeText(MainActivity.this, "You are forgiven!", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(VexActivity.this, "You are forgiven!", Toast.LENGTH_SHORT).show();
                         }
                     }).create();             //创建AlertDialog对象
             alert.show();                    //显示对话框
         }
     }
-    public void drawGirl(GirlView girl) {
-        mapBoundary(girl);
-        invalidateGirl(girl);
+    public void drawIcon(IconView icon) {
+        mapBoundary(icon);
+        invalidateIcon(icon);
     }
-    public void mapBoundary(GirlView girl){
+    public void mapBoundary(IconView iconView){
         // For the next person trying to "optimize" this code, please increment the following counter for the
         // the next fool who doesn't read this:
         // HoursWasted = 42 hours;    ------ by Eddie, a little freshman who tried this!
         if(leftSide) {
-            if (girl.bitmapX < 0) girl.bitmapX = 0;
-            else if (girl.bitmapX > 240) girl.bitmapX = 240;
-            if (girl.bitmapY < 0) girl.bitmapY = 0;
-            else if (girl.bitmapY > 520) girl.bitmapY = 520;
+            if (iconView.bitmapX < 0) iconView.bitmapX = 0;
+            else if (iconView.bitmapX > 240) iconView.bitmapX = 240;
+            if (iconView.bitmapY < 0) iconView.bitmapY = 0;
+            else if (iconView.bitmapY > 520) iconView.bitmapY = 520;
         }
         else if(!leftSide) {
-            if (girl.bitmapX < 295) girl.bitmapX = 295;
-            else if (girl.bitmapX > 530) girl.bitmapX = 530;
-            if (girl.bitmapY < 0) girl.bitmapY = 0;
-            else if (girl.bitmapY > 520) girl.bitmapY = 520;
+            if (iconView.bitmapX < 295) iconView.bitmapX = 295;
+            else if (iconView.bitmapX > 530) iconView.bitmapX = 530;
+            if (iconView.bitmapY < 0) iconView.bitmapY = 0;
+            else if (iconView.bitmapY > 520) iconView.bitmapY = 520;
         }
     }
-    public void invalidateGirl(GirlView girl){
+    public void invalidateIcon(IconView iconView){
         //调用重绘方法
-        girl.invalidate();
-        strCX = Float.toString(girl.bitmapX);
-        strCY = Float.toString(girl.bitmapY);
+        iconView.invalidate();
+        strCX = Float.toString(iconView.bitmapX);
+        strCY = Float.toString(iconView.bitmapY);
         cX.setText("x-axis: " + strCX);
         cY.setText("y-axis: " + strCY);
     }
-    public void resetGirl(GirlView girl) {
+    public void resetIcon(IconView iconView) {
         if(leftSide && up) {
-            girl.bitmapX = 15;
-            girl.bitmapY = 110;
-            invalidateGirl(girl);
+            iconView.bitmapX = 15;
+            iconView.bitmapY = 110;
+            invalidateIcon(iconView);
         }
         else if(leftSide && !up){
-            girl.bitmapX = 15;
-            girl.bitmapY = 410;
-            invalidateGirl(girl);
+            iconView.bitmapX = 15;
+            iconView.bitmapY = 410;
+            invalidateIcon(iconView);
         }
         else if(!leftSide && up){
-            girl.bitmapX = 510;
-            girl.bitmapY = 110;
-            invalidateGirl(girl);
+            iconView.bitmapX = 510;
+            iconView.bitmapY = 110;
+            invalidateIcon(iconView);
         }
         else if(!leftSide && !up){
-            girl.bitmapX = 510;
-            girl.bitmapY = 410;
-            invalidateGirl(girl);
+            iconView.bitmapX = 510;
+            iconView.bitmapY = 410;
+            invalidateIcon(iconView);
         }
     }
     // Driver mode score counters
@@ -332,50 +353,50 @@ public class MainActivity extends Activity {
         ++starDriverNear;
         strSDN = Integer.toString(starDriverNear);
         tDriverStarNear.setText("Near Star: " +strSDN);
-        insertData();
+        insertRealm();
     }
     public void driverFarStar() {
         starDriverFar = starDriverFar + 2;
         strSDF = Integer.toString(starDriverFar);
         tDriverStarFar.setText("Far Star: " + strSDF);
-        insertData();
+        insertRealm();
     }
     public void driverNearCube() {
         cubeDriverNear = cubeDriverNear + 2;
         strCDN = Integer.toString(cubeDriverNear);
         tDriverCubeNear.setText("Near Cube: " +strCDN);
-        insertData();
+        insertRealm();
     }
     public void driverFarCube() {
         cubeDriverFar = cubeDriverFar + 4;
         strCDF = Integer.toString(cubeDriverFar);
         tDriverCubeFar.setText("Far Cube: " + strCDF);
-        insertData();
+        insertRealm();
     }
     // Auto mode score counters
     public void autoNearStar() {
         ++starAutoNear;
         strSAN = Integer.toString(starAutoNear);
         tAutoStarNear.setText("Near Star: " +strSAN);
-        insertData();
+        insertRealm();
     }
     public void autoFarStar() {
         starAutoFar = starAutoFar + 2;
         strSAF = Integer.toString(starAutoFar);
         tAutoStarFar.setText("Far Star: " + strSAF);
-        insertData();
+        insertRealm();
     }
     public void autoNearCube() {
         cubeAutoNear = cubeAutoNear + 2;
         strCAN = Integer.toString(cubeAutoNear);
         tAutoCubeNear.setText("Near Cube: " +strCAN);
-        insertData();
+        insertRealm();
     }
     public void autoFarCube() {
         cubeAutoFar = cubeAutoFar + 4;
         strCAF = Integer.toString(cubeAutoFar);
         tAutoCubeFar.setText("Far Cube: " + strCAF);
-        insertData();
+        insertRealm();
     }
     public void scoreStarTally() {
         if(leftSide) {
@@ -486,23 +507,23 @@ public class MainActivity extends Activity {
             });
         }
     }
-    public void excited(){ // this is a method for vibrator, which you should know how to use it!
-        girlFriend.cancel();
-        girlFriend.vibrate(1000);
+    public void excited(){ // this is a method for vibrator, makes the device to vibrate >_<
+        vibrator.cancel();
+        vibrator.vibrate(1000);
     }
     public void lift() {
         lifted.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if(lifted.isChecked()) {
-                    liftedGirl = true;
+                    liftedIcon = true;
                     lift = "lifted";
                 }
                 else {
-                    liftedGirl = false;
+                    liftedIcon = false;
                     lift = "not lifted";
                 }
-                System.out.println(liftedGirl);
+                System.out.println(liftedIcon);
             }
         });
     }
@@ -514,7 +535,7 @@ public class MainActivity extends Activity {
         if (visibilityCube) cubePic.setVisibility(View.VISIBLE);
         else cubePic.setVisibility(View.GONE);
     }
-    public void timerBug(){
+    public void timerBug(){// the if statements here are for avoiding multiple countdown timer bug
         if(cuteDriver != null){
             cuteDriver.cancel();
             cuteDriver.onFinish();
@@ -523,36 +544,76 @@ public class MainActivity extends Activity {
             cuteAuto.cancel();
             cuteAuto.onFinish();
         }
-    }// the if statements here are for avoiding multiple countdown timer bug!!!
-    //start the timer for auto
-    public void startDataBase() {
-        dataBaseHelper = new DataBaseHelper(MainActivity.this);
-        //dataBaseHelper.getReadableDatabase();
-        //dataBaseHelper.getWritableDatabase();
-        File f = new File(getExternalFilesDir(null).getAbsolutePath() + File.separator + dataBaseHelper.DATABASE_NAME);// 创建文件
-        if(f.exists()) {
-            Toast.makeText(MainActivity.this, "Database has been created", Toast.LENGTH_SHORT).show();
-            System.out.println(f);
+    }
+//    public void startDataBase() {
+//        dataBaseHelper = new DataBaseHelper(VexActivity.this);
+//        //dataBaseHelper.getReadableDatabase();
+//        //dataBaseHelper.getWritableDatabase();
+//        File f = new File(getExternalFilesDir(null).getAbsolutePath() + File.separator + dataBaseHelper.DATABASE_NAME);// 创建文件
+//        if(f.exists()) {
+//            Toast.makeText(VexActivity.this, "Database has been created", Toast.LENGTH_SHORT).show();
+//            System.out.println(f);
+//        }
+//    }
+//    public void insertData(){
+//        dataBase = dataBaseHelper.getWritableDatabase();
+//        ContentValues values = new ContentValues();
+//        values.put("teamNumber", teamNumber);
+//        values.put("Mode", mode);
+//        values.put("time", time);
+//        values.put("SAN", strSAN);
+//        values.put("SAF", strSAF);
+//        values.put("SDN", strSDN);
+//        values.put("SDF", strSDF);
+//        values.put("CAN", strCAN);
+//        values.put("CAF", strCAF);
+//        values.put("CDN", strCDN);
+//        values.put("CDF", strCDF);
+//        values.put("lifted", lift);
+//        values.put("positionX", strCX);
+//        values.put("positionY", strCY);
+//        dataBase.insert("teamData",null,values);
+//        dataBase.close();
+//    }
+    public void openOrCreateRealm(Context context){
+        Realm.init(context);// init
+        RealmConfiguration realmConfiguration = new
+                RealmConfiguration.Builder()
+                .name("vexData.realm") //config the file name
+                .encryptionKey(new byte[64]) //encryption method, 64 default
+                .schemaVersion(1) // version is 1st
+                .build(); // build
+        realm = Realm.getInstance(realmConfiguration);
+
+        File realmFile = new File(realmConfiguration.getPath());
+        if(realmFile.exists()){
+            Snackbar.make(findViewById(R.id.vexMainRLayout),"realm created",Snackbar.LENGTH_SHORT);
+            Log.d(TAG, "openOrCreateRealm: created");
+            Log.i("R: ", realmConfiguration.getPath());
         }
     }
-    public void insertData(){
-        dataBase = dataBaseHelper.getWritableDatabase();
-        ContentValues values = new ContentValues();
-        values.put("teamNumber", teamNumber);
-        values.put("Mode", mode);
-        values.put("time", time);
-        values.put("SAN", strSAN);
-        values.put("SAF", strSAF);
-        values.put("SDN", strSDN);
-        values.put("SDF", strSDF);
-        values.put("CAN", strCAN);
-        values.put("CAF", strCAF);
-        values.put("CDN", strCDN);
-        values.put("CDF", strCDF);
-        values.put("lifted", lift);
-        values.put("positionX", strCX);
-        values.put("positionY", strCY);
-        dataBase.insert("teamData",null,values);
-        dataBase.close();
+
+    private void insertRealm(){
+        final VexStarRealm vexStarRealm = new VexStarRealm();
+        vexStarRealm.setTeamName(teamNumber);
+        vexStarRealm.setGameMode(mode);
+        vexStarRealm.setTime(time);
+        vexStarRealm.setSAN(strSAN);
+        vexStarRealm.setSAF(strSAF);
+        vexStarRealm.setSDN(strSDN);
+        vexStarRealm.setSDF(strSDF);
+        vexStarRealm.setCAN(strCAN);
+        vexStarRealm.setCAF(strCAF);
+        vexStarRealm.setCDN(strCDN);
+        vexStarRealm.setCDF(strCDF);
+        vexStarRealm.setLifted(lift);
+        vexStarRealm.setPositionX(strCX);
+        vexStarRealm.setPositionY(strCY);
+        realm.executeTransaction(new Realm.Transaction(){
+            @Override
+            public void execute(Realm realm){
+                realm.copyToRealmOrUpdate(vexStarRealm);
+            }
+        });
     }
 }

@@ -8,7 +8,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteDatabase.CursorFactory;
 import android.util.Log;
 
-import com.example.huzheyuan.scout.MainActivity;
+import com.example.huzheyuan.scout.Activities.VexActivity;
 
 /**
  * This is a class for creating database on SD card, it is necessary to create file on the SD card!
@@ -16,7 +16,7 @@ import com.example.huzheyuan.scout.MainActivity;
  */
 
 public class DataBaseContext extends ContextWrapper{
-    public DataBaseContext(MainActivity base){ // Build the constructor
+    public DataBaseContext(VexActivity base){ // Build the constructor
         super(base);
     }
     @Override

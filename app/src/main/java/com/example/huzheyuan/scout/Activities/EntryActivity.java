@@ -1,14 +1,12 @@
-package com.example.huzheyuan.scout;
+package com.example.huzheyuan.scout.Activities;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.provider.ContactsContract;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.ImageView;
+
+import com.example.huzheyuan.scout.R;
 
 public class EntryActivity extends AppCompatActivity {
     ImageView vex2017;
@@ -28,7 +26,7 @@ public class EntryActivity extends AppCompatActivity {
         vex2017.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(EntryActivity.this,MainActivity.class));
+                startActivity(new Intent(EntryActivity.this,VexActivity.class));
             }
         });
     }

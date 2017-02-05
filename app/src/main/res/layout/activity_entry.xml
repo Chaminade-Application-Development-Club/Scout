@@ -5,25 +5,35 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context="com.example.huzheyuan.scout.EntryActivity">
+    tools:context="com.example.huzheyuan.scout.Activities.EntryActivity">
 
-    <RelativeLayout
-        android:layout_width="wrap_content"
+    <ScrollView
+        android:layout_width="match_parent"
         android:layout_height="wrap_content">
-        <ImageView
-            android:id="@+id/logo1"
-            android:layout_width="match_parent"
-            android:layout_height="500dp"
-            android:src="@mipmap/logo1"
-            android:scaleType="fitXY"/>
 
-        <ImageView
+        <RelativeLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/logo1"
-            android:src="@mipmap/vexstarstruck"
-            android:scaleType="centerCrop"
-            android:id="@+id/vexGame2017" />
-    </RelativeLayout>
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/logo1"
+                android:layout_width="match_parent"
+                android:layout_height="500dp"
+                android:src="@mipmap/logo1"
+                android:scaleType="fitXY"/>
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/logo1"
+                android:src="@mipmap/vexstarstruck"
+                android:scaleType="centerCrop"
+                android:id="@+id/vexGame2017" />
+
+
+        </RelativeLayout>
+    </ScrollView>
+
+
 
 </android.support.design.widget.CoordinatorLayout>
