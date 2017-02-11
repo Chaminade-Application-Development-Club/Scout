@@ -8,9 +8,7 @@ import io.realm.annotations.PrimaryKey;
  */
 
 public class VexStarRealm extends RealmObject{
-    @PrimaryKey
     private String teamName;
-
     private String gameMode;
     private long time;
     private String positionX;

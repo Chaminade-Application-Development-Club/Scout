@@ -7,7 +7,6 @@ import android.content.Intent;
 //import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.os.Vibrator;
-import android.support.design.widget.Snackbar;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
@@ -596,25 +595,24 @@ public class VexActivity extends Activity {
     }
 
     private void insertRealm(){
-        final VexStarRealm vexStarRealm = new VexStarRealm();
-        vexStarRealm.setTeamName(teamNumber);
-        vexStarRealm.setGameMode(mode);
-        vexStarRealm.setTime(time);
-        vexStarRealm.setSAN(strSAN);
-        vexStarRealm.setSAF(strSAF);
-        vexStarRealm.setSDN(strSDN);
-        vexStarRealm.setSDF(strSDF);
-        vexStarRealm.setCAN(strCAN);
-        vexStarRealm.setCAF(strCAF);
-        vexStarRealm.setCDN(strCDN);
-        vexStarRealm.setCDF(strCDF);
-        vexStarRealm.setLifted(lift);
-        vexStarRealm.setPositionX(strCX);
-        vexStarRealm.setPositionY(strCY);
         realm.executeTransaction(new Realm.Transaction(){
             @Override
             public void execute(Realm realm){
-                realm.copyToRealmOrUpdate(vexStarRealm);
+                VexStarRealm vexStarRealm = realm.createObject(VexStarRealm.class);
+                vexStarRealm.setTeamName(teamNumber);
+                vexStarRealm.setGameMode(mode);
+                vexStarRealm.setTime(time);
+                vexStarRealm.setSAN(strSAN);
+                vexStarRealm.setSAF(strSAF);
+                vexStarRealm.setSDN(strSDN);
+                vexStarRealm.setSDF(strSDF);
+                vexStarRealm.setCAN(strCAN);
+                vexStarRealm.setCAF(strCAF);
+                vexStarRealm.setCDN(strCDN);
+                vexStarRealm.setCDF(strCDF);
+                vexStarRealm.setLifted(lift);
+                vexStarRealm.setPositionX(strCX);
+                vexStarRealm.setPositionY(strCY);
             }
         });
     }
