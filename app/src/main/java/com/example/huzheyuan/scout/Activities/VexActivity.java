@@ -69,7 +69,27 @@ public class VexActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 //        startDataBase();
+        Realm.init(this);// init
+        RealmConfiguration realmConfiguration = new
+                RealmConfiguration.Builder()
+                .directory(
+                        getApplicationContext()
+                                .getExternalFilesDir(null)
+                                .getAbsoluteFile()) //LMAO, finally I found this! Not working yet
+                .name("vexData.realm") //config the file name
+                .build(); // build
+        realm = Realm.getInstance(realmConfiguration);
+        openOrCreateRealm(this,realmConfiguration);
+    }
+    @Override
+    protected void onStart(){
+        super.onStart();
         findViews();
+        clear();
+        lift();
+        selectTeam();
+        // finalize the icon iconView, which you will understand soon... Try to delete this code!!
+        final IconView iconView = new IconView(VexActivity.this);
         sSide.setChecked(false);
         sPoint.setChecked(false);
         bTStart.setOnClickListener(new View.OnClickListener() {
@@ -78,20 +98,10 @@ public class VexActivity extends Activity {
                 startActivity(new Intent(VexActivity.this,QRcodeActivity.class));
             }
         });
-    }
-    @Override
-    protected void onStart(){
-        super.onStart();
-        clear();
-        lift();
-        selectTeam();
-        // finalize the icon iconView, which you will understand soon... Try to delete this code!!
-        final IconView iconView = new IconView(VexActivity.this);
         /**
          * Don't even try to make these switchers into method! And don't ask me why, think, plus
          * I've done the experiment already!
          */
-        openOrCreateRealm(this);
         sSide.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -575,19 +585,11 @@ public class VexActivity extends Activity {
 //        dataBase.insert("teamData",null,values);
 //        dataBase.close();
 //    }
-    public void openOrCreateRealm(Context context){
-        Realm.init(context);// init
-        RealmConfiguration realmConfiguration = new
-                RealmConfiguration.Builder()
-                .name("vexData.realm") //config the file name
-                .encryptionKey(new byte[64]) //encryption method, 64 default
-                .schemaVersion(1) // version is 1st
-                .build(); // build
-        realm = Realm.getInstance(realmConfiguration);
 
+    private void openOrCreateRealm(Context context,RealmConfiguration realmConfiguration){
         File realmFile = new File(realmConfiguration.getPath());
         if(realmFile.exists()){
-            Snackbar.make(findViewById(R.id.vexMainRLayout),"realm created",Snackbar.LENGTH_SHORT);
+            Toast.makeText(this,realmFile.getPath(),Toast.LENGTH_LONG).show();
             Log.d(TAG, "openOrCreateRealm: created");
             Log.i("R: ", realmConfiguration.getPath());
         }
