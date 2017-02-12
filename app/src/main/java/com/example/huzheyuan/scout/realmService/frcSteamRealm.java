@@ -2,14 +2,12 @@ package com.example.huzheyuan.scout.realmService;
 
 import io.realm.RealmObject;
 import io.realm.annotations.Ignore;
-import io.realm.annotations.PrimaryKey;
 
 /**
  * Created by huzhe on 1/22/2017.
  */
 
-public class frcSteamRealm extends RealmObject{
-    @PrimaryKey
+public class FrcSteamRealm extends RealmObject{
     private String teamName;
 
     @Ignore

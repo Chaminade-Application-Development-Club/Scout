@@ -37,7 +37,7 @@ public class BlueToothSendingActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_blue_tooth_sending);
+        setContentView(R.layout.activity_bluetooth_sending);
         fabBT = (FloatingActionButton) findViewById(R.id.fabBlueTooth);
         refreshBT = (SwipeRefreshLayout) findViewById(R.id.refreshBTDevice);
         bTList = (ListView) findViewById(R.id.blueToothList);

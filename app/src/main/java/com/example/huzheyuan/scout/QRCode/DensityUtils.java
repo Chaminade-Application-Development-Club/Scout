@@ -1,4 +1,4 @@
-package com.example.huzheyuan.scout.QRCode;
+package com.example.huzheyuan.scout.qRCode;
 
 /**
  * Created by leo428 on 1/16/17.

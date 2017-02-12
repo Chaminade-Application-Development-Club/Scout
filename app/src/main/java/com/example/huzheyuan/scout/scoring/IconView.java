@@ -1,4 +1,4 @@
-package com.example.huzheyuan.scout.Activities;
+package com.example.huzheyuan.scout.scoring;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -13,12 +13,14 @@ public class IconView extends View
     //定义相关变量,依次是妹子显示位置的X,Y坐标, icon's x,y coordinates
     public float bitmapX;
     public float bitmapY;
+    public String gameName;
 
-    public IconView(Context context) {
+    public IconView(Context context, String game) {
         super(context);
         //设置妹子的起始坐标, starting coordinate
         bitmapX = 15;
         bitmapY = 110;
+        gameName = game;
     }
 
     //重写View类的onDraw()方法, override onDraw() method
@@ -29,20 +31,23 @@ public class IconView extends View
 
         //创建,并且实例化Paint的对象
         Paint paint = new Paint();
-
         Bitmap bitmap;
-        if(bitmapX < 250){
+        if(bitmapX < 250 && gameName.equals("VexStar")){
             bitmap = BitmapFactory.decodeResource(this.getResources(), R.mipmap.roboticonleft);
             //绘制萌妹子, paint/draw icon
             canvas.drawBitmap(bitmap, bitmapX, bitmapY,paint);
         }
-        else{
+        else if(bitmapX > 250 && gameName.equals("VexStar")){
             //根据图片生成位图对象, generate bitmap image
             bitmap = BitmapFactory.decodeResource(this.getResources(), R.mipmap.roboticon);
             //绘制萌妹子
             canvas.drawBitmap(bitmap, bitmapX, bitmapY,paint);
         }
-
+        else{
+            bitmap = BitmapFactory.decodeResource(this.getResources(), R.mipmap.roboticonleft);
+            //绘制萌妹子, paint/draw icon
+            canvas.drawBitmap(bitmap, bitmapX, bitmapY,paint);
+        }
         //判断图片是否回收,木有回收的话强制收回图片, recycle if it is not recycled >_<
         if(bitmap.isRecycled())
         {

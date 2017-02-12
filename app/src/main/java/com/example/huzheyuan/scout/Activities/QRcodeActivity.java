@@ -1,4 +1,4 @@
-package com.example.huzheyuan.scout.Activities;
+package com.example.huzheyuan.scout.activities;
 
 import android.graphics.Bitmap;
 import android.os.Bundle;
@@ -9,7 +9,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.ImageView;
 
-import com.example.huzheyuan.scout.QRCode.QRUtils;
+import com.example.huzheyuan.scout.qRCode.QRUtils;
 import com.example.huzheyuan.scout.R;
 import com.google.zxing.WriterException;
 

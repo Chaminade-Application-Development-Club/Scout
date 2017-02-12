@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string-array name="data">
-        <item>Select_team_number</item>
+        <item>Team number</item>
         <item>20X</item>
         <item>20Y</item>
         <item>20Z</item>

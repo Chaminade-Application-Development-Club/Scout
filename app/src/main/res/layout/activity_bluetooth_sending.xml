@@ -7,7 +7,7 @@
     android:fitsSystemWindows="true"
     tools:context="com.example.huzheyuan.scout.bluetoothVEX.BlueToothSendingActivity">
 
-    <include layout="@layout/content_blue_tooth_sending" />
+    <include layout="@layout/content_bluetooth_sending" />
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"

@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context="com.example.huzheyuan.scout.Activities.EntryActivity">
+    tools:context="com.example.huzheyuan.scout.activities.EntryActivity">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -23,14 +23,19 @@
                 android:scaleType="fitXY"/>
 
             <ImageView
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/logo1"
                 android:src="@mipmap/vexstarstruck"
                 android:scaleType="centerCrop"
                 android:id="@+id/vexGame2017" />
-
-
+            <ImageView
+                android:id="@+id/frcSteamWorks"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/vexGame2017"
+                android:src="@mipmap/first_steamworks_transparent_logo"
+                />
         </RelativeLayout>
     </ScrollView>
 

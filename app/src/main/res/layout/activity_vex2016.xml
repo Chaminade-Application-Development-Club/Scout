@@ -93,7 +93,7 @@
             android:id="@+id/leftInside"
             android:layout_width="600dp"
             android:layout_height="match_parent"
-            android:src="@mipmap/news" />
+            android:src="@mipmap/vex2017field" />
     </RelativeLayout>
 
     <Button
@@ -279,7 +279,7 @@
         android:layout_alignParentStart="true">
 
         <Spinner
-            android:id = "@+id/spinTeamNum"
+            android:id = "@+id/spinVexTeamNum"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity = "start"
@@ -290,7 +290,7 @@
         </Spinner>
 
         <TextView
-            android:id = "@+id/countDown"
+            android:id = "@+id/countDownVex"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity = "center"

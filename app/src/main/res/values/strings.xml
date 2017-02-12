@@ -3,4 +3,5 @@
     <string name="title_activity_entry">Scout</string>
     <string name="title_activity_blue_tooth_sending">BlueToothSendingActivity</string>
     <string name="title_activity_qrcode">QRcode</string>
+    <string name="title_activity_frc2017">Frc2017Activity</string>
 </resources>

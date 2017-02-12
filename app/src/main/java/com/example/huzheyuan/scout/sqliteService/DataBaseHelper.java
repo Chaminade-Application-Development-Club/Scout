@@ -5,13 +5,13 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
-import com.example.huzheyuan.scout.Activities.VexActivity;
+import com.example.huzheyuan.scout.activities.Vex2016Activity;
 
 import java.io.File;
 
 public class DataBaseHelper extends SQLiteOpenHelper {
 
-    VexActivity vexActivity = new VexActivity();
+    Vex2016Activity vex2016Activity = new Vex2016Activity();
     public final static int VERSION = 1;// 版本号
     String TABLE_NAME = "teamData";// 表名
     //public final static String ID = "id";// 后面ContentProvider使用

@@ -1,4 +1,4 @@
-package com.example.huzheyuan.scout.Activities;
+package com.example.huzheyuan.scout.activities;
 
 import android.app.Service;
 //import android.content.ContentValues;
@@ -28,6 +28,7 @@ import android.content.DialogInterface;
 
 import com.example.huzheyuan.scout.R;
 import com.example.huzheyuan.scout.realmService.VexStarRealm;
+import com.example.huzheyuan.scout.scoring.IconView;
 //import com.example.huzheyuan.scout.sqliteService.DataBaseContext;
 //import com.example.huzheyuan.scout.sqliteService.DataBaseHelper;
 
@@ -35,7 +36,7 @@ import io.realm.Realm;
 import io.realm.RealmConfiguration;
 import static android.content.ContentValues.TAG;
 
-public class VexActivity extends Activity {
+public class Vex2016Activity extends Activity {
     RelativeLayout frame, mainLayout;
     TextView cX,cY,cT,tDriverStarNear,tDriverStarFar,tDriverCubeNear,tDriverCubeFar;
     TextView tAutoStarNear,tAutoStarFar, tAutoCubeNear,tAutoCubeFar ;
@@ -66,7 +67,7 @@ public class VexActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_vex2016);
 //        startDataBase();
         Realm.init(this);// init
         RealmConfiguration realmConfiguration = new
@@ -88,13 +89,13 @@ public class VexActivity extends Activity {
         lift();
         selectTeam();
         // finalize the icon iconView, which you will understand soon... Try to delete this code!!
-        final IconView iconView = new IconView(VexActivity.this);
+        final IconView iconView = new IconView(Vex2016Activity.this, "VexStar");
         sSide.setChecked(false);
         sPoint.setChecked(false);
         bTStart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(VexActivity.this,QRcodeActivity.class));
+                startActivity(new Intent(Vex2016Activity.this,QRcodeActivity.class));
             }
         });
         /**
@@ -123,7 +124,7 @@ public class VexActivity extends Activity {
             public void onClick(View v) {
                 autoMode = true;
                 mode = "auto";
-                Toast.makeText(VexActivity.this, "Auto Mode Starts", Toast.LENGTH_SHORT).show();
+                Toast.makeText(Vex2016Activity.this, "Auto Mode Starts", Toast.LENGTH_SHORT).show();
                 timerBug();
                 cuteAuto = new CountDownTimer(15000, 1000) {
                     // Auto time limits 15s
@@ -162,7 +163,7 @@ public class VexActivity extends Activity {
             public void onClick(View v) {
                 autoMode = false;
                 mode = "driver";
-                Toast.makeText(VexActivity.this, "Driver Mode Starts", Toast.LENGTH_SHORT).show();
+                Toast.makeText(Vex2016Activity.this, "Driver Mode Starts", Toast.LENGTH_SHORT).show();
                 timerBug();
                 cuteDriver = new CountDownTimer(105000, 1000) { // Driver time limits 105s
                     public void onTick(long millisUntilFinished) {
@@ -205,7 +206,7 @@ public class VexActivity extends Activity {
     public void findViews() {
         cX = (TextView) findViewById(R.id.coordinateX);
         cY = (TextView) findViewById(R.id.coordinateY);
-        cT = (TextView) findViewById(R.id.countDown);
+        cT = (TextView) findViewById(R.id.countDownVex);
         tDriverStarNear = (TextView) findViewById(R.id.textDriverStarNear);
         tDriverStarFar = (TextView) findViewById(R.id.textDriverStarFar);
         tDriverCubeNear = (TextView) findViewById(R.id.textDriverCubeNear);
@@ -226,7 +227,7 @@ public class VexActivity extends Activity {
         bTStart = (Button) findViewById(R.id.btnBt);
         sSide = (Switch) findViewById(R.id.stchSide);
         sPoint = (Switch) findViewById(R.id.stchPoint);
-        teamNumSpin = (Spinner) findViewById(R.id.spinTeamNum);
+        teamNumSpin = (Spinner) findViewById(R.id.spinVexTeamNum);
         lifted = (CheckBox) findViewById(R.id.Checklifted);
         frame = (RelativeLayout) findViewById(R.id.fieldLayout);
         mainLayout = (RelativeLayout) findViewById(R.id.vexMainRLayout);
@@ -283,7 +284,7 @@ public class VexActivity extends Activity {
                 teamNumberArray = getResources().getStringArray(R.array.data);
                 teamNumber = teamNumberArray[position];
                 arrayPosition = position;
-                Toast.makeText(VexActivity.this, "Team: "+teamNumberArray[position], Toast.LENGTH_SHORT).show();
+                Toast.makeText(Vex2016Activity.this, "Team: "+teamNumberArray[position], Toast.LENGTH_SHORT).show();
             }
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
@@ -294,13 +295,13 @@ public class VexActivity extends Activity {
         if(arrayPosition == 0){
             timerBug();
             alert = null;
-            builder = new AlertDialog.Builder(VexActivity.this);
+            builder = new AlertDialog.Builder(Vex2016Activity.this);
             alert = builder.setTitle("Alarm：")
                     .setMessage("Please choose team number!")
                     .setPositiveButton("Sorry, Please forgive me", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
-                            Toast.makeText(VexActivity.this, "You are forgiven!", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(Vex2016Activity.this, "You are forgiven!", Toast.LENGTH_SHORT).show();
                         }
                     }).create();             //创建AlertDialog对象
             alert.show();                    //显示对话框
@@ -468,7 +469,7 @@ public class VexActivity extends Activity {
                     visibilityStar = false;
                     popStar();
                     popCube();
-                    excited();
+                    vibration();
                     return true;
                 }
             });
@@ -482,7 +483,7 @@ public class VexActivity extends Activity {
                     visibilityStar = false;
                     popStar();
                     popCube();
-                    excited();
+                    vibration();
                     return true;
                 }
             });
@@ -497,7 +498,7 @@ public class VexActivity extends Activity {
                     visibilityStar = false;
                     popStar();
                     popCube();
-                    excited();
+                    vibration();
                     return true;
                 }
             });
@@ -510,13 +511,13 @@ public class VexActivity extends Activity {
                     visibilityCube = true;
                     popStar();
                     popCube();
-                    excited();
+                    vibration();
                     return true;
                 }
             });
         }
     }
-    public void excited(){ // this is a method for vibrator, makes the device to vibrate >_<
+    public void vibration(){ // this is a method for vibrator, makes the device to vibrate >_<
         vibrator.cancel();
         vibrator.vibrate(1000);
     }
@@ -555,12 +556,12 @@ public class VexActivity extends Activity {
         }
     }
 //    public void startDataBase() {
-//        dataBaseHelper = new DataBaseHelper(VexActivity.this);
+//        dataBaseHelper = new DataBaseHelper(Vex2016Activity.this);
 //        //dataBaseHelper.getReadableDatabase();
 //        //dataBaseHelper.getWritableDatabase();
 //        File f = new File(getExternalFilesDir(null).getAbsolutePath() + File.separator + dataBaseHelper.DATABASE_NAME);// 创建文件
 //        if(f.exists()) {
-//            Toast.makeText(VexActivity.this, "Database has been created", Toast.LENGTH_SHORT).show();
+//            Toast.makeText(Vex2016Activity.this, "Database has been created", Toast.LENGTH_SHORT).show();
 //            System.out.println(f);
 //        }
 //    }

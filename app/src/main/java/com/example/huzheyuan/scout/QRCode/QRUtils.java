@@ -1,4 +1,4 @@
-package com.example.huzheyuan.scout.QRCode;
+package com.example.huzheyuan.scout.qRCode;
 
 /**
  * Created by leo428 on 1/16/17.
@@ -7,16 +7,11 @@ package com.example.huzheyuan.scout.QRCode;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Color;
-import android.graphics.Matrix;
 
 import com.google.zxing.BarcodeFormat;
-import com.google.zxing.EncodeHintType;
 import com.google.zxing.MultiFormatWriter;
 import com.google.zxing.WriterException;
 import com.google.zxing.common.BitMatrix;
-import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel;
-
-import java.util.Hashtable;
 
 public class QRUtils {
     /**

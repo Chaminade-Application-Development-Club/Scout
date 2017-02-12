@@ -11,7 +11,7 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="com.example.huzheyuan.scout.bluetoothVEX.BlueToothSendingActivity"
-    tools:showIn="@layout/activity_blue_tooth_sending">
+    tools:showIn="@layout/activity_bluetooth_sending">
 
     <android.support.v4.widget.SwipeRefreshLayout
         android:id="@+id/refreshBTDevice"

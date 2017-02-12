@@ -1,7 +1,6 @@
 package com.example.huzheyuan.scout.realmService;
 
 import io.realm.RealmObject;
-import io.realm.annotations.PrimaryKey;
 
 /**
  * Created by leo428 on 2/3/17.
