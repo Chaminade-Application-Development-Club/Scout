@@ -26,7 +26,8 @@
                 android:layout_height="wrap_content"
                 android:gravity="center_vertical|start"
                 android:dropDownSelector="@color/colorPrimary"
-                android:entries="@array/data">
+                android:entries="@array/data"
+                >
             </Spinner>
             <TextView
                 android:id = "@+id/countDownFrc"
@@ -42,15 +43,23 @@
     <include layout="@layout/content_frc2017"
         android:id="@+id/include" />
 
-    <com.github.clans.fab.FloatingActionButton
-        android:id="@+id/fab"
+    <com.github.clans.fab.FloatingActionMenu
+        android:id="@+id/multiFunctionFAB"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
-        android:src="@android:drawable/ic_menu_send"
+        app:menu_icon="@android:drawable/ic_menu_send"
         app:layout_anchor="@+id/include"
         app:layout_anchorGravity="top|right"
-        android:layout_gravity="center_vertical|start"
-        />
+        android:layout_gravity="bottom|start"
+        app:menu_openDirection="down">
+        <com.github.clans.fab.FloatingActionButton
+            android:id="@+id/fabAuto"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_nature_people_black_24dp"
+            app:fab_size="mini"/>
+    </com.github.clans.fab.FloatingActionMenu>
+
 </android.support.design.widget.CoordinatorLayout>

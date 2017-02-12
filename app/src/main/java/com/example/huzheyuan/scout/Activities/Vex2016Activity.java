@@ -95,7 +95,7 @@ public class Vex2016Activity extends Activity {
         bTStart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(Vex2016Activity.this,QRcodeActivity.class));
+                startActivity(new Intent(Vex2016Activity.this, QRcodeActivity.class));
             }
         });
         /**
