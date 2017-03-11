@@ -43,6 +43,18 @@ public class IconView extends View
             //绘制萌妹子
             canvas.drawBitmap(bitmap, bitmapX, bitmapY,paint);
         }
+        else if(bitmapX < 250 && gameName.equals("Frc2017")){
+            //根据图片生成位图对象, generate bitmap image
+            bitmap = BitmapFactory.decodeResource(this.getResources(), R.mipmap.roboticon);
+            //绘制萌妹子
+            canvas.drawBitmap(bitmap, bitmapX, bitmapY,paint);
+        }
+        else if(bitmapX > 250 && gameName.equals("Frc2017")){
+            //根据图片生成位图对象, generate bitmap image
+            bitmap = BitmapFactory.decodeResource(this.getResources(), R.mipmap.roboticon);
+            //绘制萌妹子
+            canvas.drawBitmap(bitmap, bitmapX, bitmapY,paint);
+        }
         else{
             bitmap = BitmapFactory.decodeResource(this.getResources(), R.mipmap.roboticonleft);
             //绘制萌妹子, paint/draw icon

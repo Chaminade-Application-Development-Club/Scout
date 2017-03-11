@@ -19,20 +19,19 @@
             android:layout_height="?attr/actionBarSize"
             android:background="@color/colorPrimary"
             app:popupTheme="@style/AppTheme.PopupOverlay">
-
-            <Spinner
-                android:id="@+id/spinFrcTeamNumber"
+            <Button
+                android:id="@+id/btnNewGame"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:gravity="center_vertical|start"
-                android:dropDownSelector="@color/colorPrimary"
-                android:entries="@array/data"
-                >
-            </Spinner>
+                android:background="@null"
+                android:text="New Game"
+                android:textAllCaps="false"
+                />
             <TextView
                 android:id = "@+id/countDownFrc"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="350dp"
                 android:text="Please Start"
                 android:padding="10dp"
                 android:textAppearance="?android:attr/textAppearanceLarge"
@@ -45,21 +44,38 @@
 
     <com.github.clans.fab.FloatingActionMenu
         android:id="@+id/multiFunctionFAB"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="0dp"
+        android:layout_marginEnd="0dp"
+        android:layout_marginTop="28dp"
         app:menu_icon="@android:drawable/ic_menu_send"
         app:layout_anchor="@+id/include"
         app:layout_anchorGravity="top|right"
         android:layout_gravity="bottom|start"
-        app:menu_openDirection="down">
+        app:menu_openDirection="down"
+        app:menu_backgroundColor="#6affffff">
+        <com.github.clans.fab.FloatingActionButton
+            android:id="@+id/fabGenerateQR"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/qr"
+            app:fab_size="mini"
+            app:fab_label="Generate QR Code" />
+        <com.github.clans.fab.FloatingActionButton
+            android:id="@+id/fabTeleop"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_nature_people_black_24dp"
+            app:fab_size="mini"
+            app:fab_label="Teleop"/>
         <com.github.clans.fab.FloatingActionButton
             android:id="@+id/fabAuto"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_nature_people_black_24dp"
-            app:fab_size="mini"/>
+            android:src="@drawable/ic_directions_car_black_24dp"
+            app:fab_size="mini"
+            app:fab_label="Autonomous"/>
     </com.github.clans.fab.FloatingActionMenu>
 
 </android.support.design.widget.CoordinatorLayout>
