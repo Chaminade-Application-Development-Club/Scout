@@ -22,22 +22,26 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true" />
-    <Button
-        android:id="@+id/leftBurner"
+
+    <com.github.clans.fab.FloatingActionMenu
+        android:id="@+id/leftFuel"
         android:layout_width="wrap_content"
-        android:layout_height="80dp"
+        android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_marginStart="135dp"
-        android:background="@null"
-        />
-    <Button
-        android:id="@+id/rightBurner"
+        android:layout_marginStart="80dp"
+        app:menu_colorNormal="#44b649">
+
+    </com.github.clans.fab.FloatingActionMenu>
+
+    <com.github.clans.fab.FloatingActionMenu
+        android:id="@+id/rightFuel"
         android:layout_width="wrap_content"
-        android:layout_height="80dp"
+        android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginEnd="138dp"
-        android:background="@null"
-        />
+        android:layout_marginEnd="80dp"
+        app:menu_colorNormal="#44b649">
+
+    </com.github.clans.fab.FloatingActionMenu>
 
 </RelativeLayout>

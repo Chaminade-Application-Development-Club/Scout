@@ -17,15 +17,21 @@ public class IconView extends View
 
     public IconView(Context context, String game) {
         super(context);
-        //设置妹子的起始坐标, starting coordinate
-        bitmapX = 15;
-        bitmapY = 110;
+        if(game.equals("VexStar")) {
+            //设置妹子的起始坐标, starting coordinate
+            bitmapX = 15;
+            bitmapY = 110;
+        }
+        else{
+            //设置妹子的起始坐标, starting coordinate
+            bitmapX = 0;
+            bitmapY = 0;
+        }
         gameName = game;
     }
 
     //重写View类的onDraw()方法, override onDraw() method
     @Override
-
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
 
@@ -43,15 +49,15 @@ public class IconView extends View
             //绘制萌妹子
             canvas.drawBitmap(bitmap, bitmapX, bitmapY,paint);
         }
-        else if(bitmapX < 250 && gameName.equals("Frc2017")){
+        else if(bitmapX < 480 && gameName.equals("Frc2017")){
             //根据图片生成位图对象, generate bitmap image
-            bitmap = BitmapFactory.decodeResource(this.getResources(), R.mipmap.roboticon);
+            bitmap = BitmapFactory.decodeResource(this.getResources(), R.mipmap.doraemon1right);
             //绘制萌妹子
             canvas.drawBitmap(bitmap, bitmapX, bitmapY,paint);
         }
-        else if(bitmapX > 250 && gameName.equals("Frc2017")){
+        else if(bitmapX > 480 && gameName.equals("Frc2017")){
             //根据图片生成位图对象, generate bitmap image
-            bitmap = BitmapFactory.decodeResource(this.getResources(), R.mipmap.roboticon);
+            bitmap = BitmapFactory.decodeResource(this.getResources(), R.mipmap.doraemonleft);
             //绘制萌妹子
             canvas.drawBitmap(bitmap, bitmapX, bitmapY,paint);
         }

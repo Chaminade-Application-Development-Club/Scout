@@ -28,19 +28,62 @@
                 android:textAllCaps="false"
                 />
             <TextView
+                android:id = "@+id/teamIDText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="50dp"
+                android:text="    "
+                android:padding="10dp"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                />
+            <TextView
                 android:id = "@+id/countDownFrc"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="350dp"
+                android:layout_marginStart="50dp"
                 android:text="Please Start"
                 android:padding="10dp"
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 />
+            <TextView
+                android:id="@+id/xyText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="25dp" />
         </android.support.v7.widget.Toolbar>
     </android.support.design.widget.AppBarLayout>
 
-    <include layout="@layout/content_frc2017"
-        android:id="@+id/include" />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="43dp">
+
+        <com.github.clans.fab.FloatingActionMenu
+            android:id="@+id/actionFAB"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            app:menu_labels_position="right"
+            app:menu_icon="@android:drawable/ic_menu_send"
+            app:layout_anchor="@+id/include"
+            app:layout_anchorGravity="bottom|right"
+            android:layout_gravity="top|start"
+            app:menu_openDirection="down"
+            app:menu_backgroundColor= "@null">
+            <com.github.clans.fab.FloatingActionButton
+                android:id="@+id/fabNothing"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/qr"
+                app:fab_size="mini"
+                app:fab_label="Generate QR Code" />
+        </com.github.clans.fab.FloatingActionMenu>
+
+        <include layout="@layout/content_frc2017"
+            android:id="@+id/include" />
+
+    </RelativeLayout>
 
     <com.github.clans.fab.FloatingActionMenu
         android:id="@+id/multiFunctionFAB"
@@ -54,7 +97,7 @@
         app:layout_anchorGravity="top|right"
         android:layout_gravity="bottom|start"
         app:menu_openDirection="down"
-        app:menu_backgroundColor="#6affffff">
+        app:menu_backgroundColor="#9affffff">
         <com.github.clans.fab.FloatingActionButton
             android:id="@+id/fabGenerateQR"
             android:layout_width="wrap_content"

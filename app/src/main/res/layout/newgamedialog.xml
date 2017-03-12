@@ -2,19 +2,51 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
-
-    <TextView
+    android:orientation="horizontal">
+    <LinearLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Game ID: "/>
-
-    <EditText
-        android:id="@+id/inputGameId"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Team ID: "/>
+        <EditText
+            android:id="@+id/inputTeamId"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="Enter Team Name"
+            android:inputType="text" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Game ID: "/>
+        <EditText
+            android:id="@+id/inputGameId"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="Enter Game ID"
+            android:inputType="number" />
+    </LinearLayout>
+    <LinearLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="number"
-        />
-
+        android:layout_height="match_parent"
+        android:layout_marginStart="25dp"
+        android:orientation="vertical">
+        <Switch
+            android:id="@+id/sideSwitch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="Swith Sides"
+            android:textOff="Red"
+            android:textOn="Blue"
+            android:textColorHint="#01579B"
+            />
+        <NumberPicker
+            android:id="@+id/positionPicker"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+        </NumberPicker>
+    </LinearLayout>
 
 </LinearLayout>

@@ -52,7 +52,7 @@ public class Vex2016Activity extends Activity {
     int cubeAutoNear = 0,cubeAutoFar = 0,starAutoNear = 0,starAutoFar = 0;
     int cubeDriverNear = 0,cubeDriverFar = 0,starDriverNear = 0,starDriverFar = 0,arrayPosition = 0;
     boolean leftSide = true,up = true,liftedIcon = false,autoMode = false;
-    boolean visibilityStar = false,visibilityCube = false,chooseTeam = false;//Set all the variables
+    boolean visibilityStar = false,visibilityCube = false;//Set all the variables
     CountDownTimer cuteDriver = null,cuteAuto = null;
 //    DataBaseContext dBContext;
 //    DataBaseHelper dataBaseHelper;
@@ -100,7 +100,7 @@ public class Vex2016Activity extends Activity {
         });
         /**
          * Don't even try to make these switchers into method! And don't ask me why, think, plus
-         * I've done the experiment already!
+         * I've done the experiment already! (Well, it is doable, it is just me ~~)
          */
         sSide.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
