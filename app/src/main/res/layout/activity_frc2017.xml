@@ -19,14 +19,6 @@
             android:layout_height="?attr/actionBarSize"
             android:background="@color/colorPrimary"
             app:popupTheme="@style/AppTheme.PopupOverlay">
-            <Button
-                android:id="@+id/btnNewGame"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@null"
-                android:text="New Game"
-                android:textAllCaps="false"
-                />
             <TextView
                 android:id = "@+id/teamIDText"
                 android:layout_width="wrap_content"
@@ -96,6 +88,7 @@
         app:layout_anchor="@+id/include"
         app:layout_anchorGravity="top|right"
         android:layout_gravity="bottom|start"
+        app:menu_fab_label="Create New Game"
         app:menu_openDirection="down"
         app:menu_backgroundColor="#9affffff">
         <com.github.clans.fab.FloatingActionButton

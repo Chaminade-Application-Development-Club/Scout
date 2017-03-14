@@ -7,7 +7,6 @@ package com.example.huzheyuan.scout.qRCode;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Color;
-
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.MultiFormatWriter;
 import com.google.zxing.WriterException;

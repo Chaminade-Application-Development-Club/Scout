@@ -10,7 +10,6 @@ import com.example.huzheyuan.scout.R;
 
 public class EntryActivity extends AppCompatActivity {
     ImageView vex2017, frc2017;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,7 +32,7 @@ public class EntryActivity extends AppCompatActivity {
         frc2017.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                startActivity(new Intent(EntryActivity.this,Frc2017Activity.class));
+                startActivity(new Intent(EntryActivity.this, Frc2017Activity.class));
             }
         });
     }
