@@ -397,7 +397,8 @@ public class Frc2017Activity extends AppCompatActivity{
             @Override
             public boolean onLongClick(View v) {
                 startTime = tU.startTimer();
-                isHighGoal = true;
+                if(inGame) isHighGoal = true;
+                else isHighGoal = false;
                 FloatActionUtil.ProgressType type = mProgressTypes.poll();
                 Log.d(TAG, "onLongClick: " + type);
                 fab.setShowProgressBackground(false);
