@@ -1,4 +1,4 @@
-package com.example.huzheyuan.scout.scoring;
+package com.example.huzheyuan.scout.utilities;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -8,14 +8,15 @@ import android.graphics.Paint;
 import android.view.View;
 import com.example.huzheyuan.scout.R;
 
-public class IconView extends View
+public class IconUtil extends View
 {
     //定义相关变量,依次是妹子显示位置的X,Y坐标, icon's x,y coordinates
     public float bitmapX;
     public float bitmapY;
     public String gameName;
+    Float dpi = getResources().getDisplayMetrics().density;
 
-    public IconView(Context context, String game) {
+    public IconUtil(Context context, String game) {
         super(context);
         if(game.equals("VexStar")) {
             //设置妹子的起始坐标, starting coordinate
@@ -38,24 +39,25 @@ public class IconView extends View
         //创建,并且实例化Paint的对象
         Paint paint = new Paint();
         Bitmap bitmap;
-        if(bitmapX < 250 && gameName.equals("VexStar")){
+
+        if(bitmapX < 250 * dpi && gameName.equals("VexStar")){
             bitmap = BitmapFactory.decodeResource(this.getResources(), R.mipmap.roboticonleft);
             //绘制萌妹子, paint/draw icon
             canvas.drawBitmap(bitmap, bitmapX, bitmapY,paint);
         }
-        else if(bitmapX > 250 && gameName.equals("VexStar")){
+        else if(bitmapX > 250 * dpi && gameName.equals("VexStar")){
             //根据图片生成位图对象, generate bitmap image
             bitmap = BitmapFactory.decodeResource(this.getResources(), R.mipmap.roboticon);
             //绘制萌妹子
             canvas.drawBitmap(bitmap, bitmapX, bitmapY,paint);
         }
-        else if(bitmapX < 480 && gameName.equals("Frc2017")){
+        else if(bitmapX < 480 * dpi && gameName.equals("Frc2017")){
             //根据图片生成位图对象, generate bitmap image
             bitmap = BitmapFactory.decodeResource(this.getResources(), R.mipmap.doraemon1right);
             //绘制萌妹子
             canvas.drawBitmap(bitmap, bitmapX, bitmapY,paint);
         }
-        else if(bitmapX > 480 && gameName.equals("Frc2017")){
+        else if(bitmapX > 480 * dpi&& gameName.equals("Frc2017")){
             //根据图片生成位图对象, generate bitmap image
             bitmap = BitmapFactory.decodeResource(this.getResources(), R.mipmap.doraemonleft);
             //绘制萌妹子

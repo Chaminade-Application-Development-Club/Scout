@@ -37,7 +37,7 @@
             android:id="@+id/sideSwitch"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:hint="Swith Sides"
+            android:hint="Switch Sides"
             android:textOff="Red"
             android:textOn="Blue"
             android:textColorHint="#01579B"

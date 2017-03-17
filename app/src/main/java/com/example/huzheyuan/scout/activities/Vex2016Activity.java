@@ -28,7 +28,7 @@ import android.content.DialogInterface;
 
 import com.example.huzheyuan.scout.R;
 import com.example.huzheyuan.scout.realmService.VexStarRealm;
-import com.example.huzheyuan.scout.scoring.IconView;
+import com.example.huzheyuan.scout.utilities.IconUtil;
 //import com.example.huzheyuan.scout.sqliteService.DataBaseContext;
 //import com.example.huzheyuan.scout.sqliteService.DataBaseHelper;
 
@@ -89,7 +89,7 @@ public class Vex2016Activity extends Activity {
         lift();
         selectTeam();
         // finalize the icon iconView, which you will understand soon... Try to delete this code!!
-        final IconView iconView = new IconView(Vex2016Activity.this, "VexStar");
+        final IconUtil iconUtil = new IconUtil(Vex2016Activity.this, "VexStar");
         sSide.setChecked(false);
         sPoint.setChecked(false);
         bTStart.setOnClickListener(new View.OnClickListener() {
@@ -107,7 +107,7 @@ public class Vex2016Activity extends Activity {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) leftSide = false;
                 else leftSide = true;
-                resetIcon(iconView);
+                resetIcon(iconUtil);
             }
         });
 
@@ -116,7 +116,7 @@ public class Vex2016Activity extends Activity {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if(isChecked) up = false;
                 else up = true;
-                resetIcon(iconView);
+                resetIcon(iconUtil);
             }
         });
         bAuto.setOnClickListener(new View.OnClickListener() { //Auto start button
@@ -135,22 +135,22 @@ public class Vex2016Activity extends Activity {
                         cT.setText("End: " + time);
                         //the tallies are for counting the scoring actions ...
                         //Then, this is the code for drawing a icon on the screen!!!
-                        iconView.setOnTouchListener(new View.OnTouchListener() {
+                        iconUtil.setOnTouchListener(new View.OnTouchListener() {
                             @Override
                             public boolean onTouch(View view, MotionEvent event) {
                                 //设置妹子显示的位置, set the icon's position
-                                iconView.bitmapX = event.getX() - 36;
-                                iconView.bitmapY = event.getY() - 44;
+                                iconUtil.bitmapX = event.getX() - 36;
+                                iconUtil.bitmapY = event.getY() - 44;
                                 // the only reason why I minus number from the position is ...
                                 // you can try to remove it and you will know why!!!
-                                drawIcon(iconView);
+                                drawIcon(iconUtil);
                                 return true; // you have to return true here >_<
                             }
                         });
                     }
                     public void onFinish(){ // on finish is a important method to know, learn it!
-                        resetIcon(iconView);
-                        iconView.setOnTouchListener(null);
+                        resetIcon(iconUtil);
+                        iconUtil.setOnTouchListener(null);
                         cT.setText("End!");
                     }
                 }.start(); // end of the timer
@@ -171,27 +171,27 @@ public class Vex2016Activity extends Activity {
                         cT.setText("End: " + time);
                         scoreStarTally();
                         scoreCubeTally();
-                        iconView.setOnTouchListener(new View.OnTouchListener() {
+                        iconUtil.setOnTouchListener(new View.OnTouchListener() {
                             @Override
                             public boolean onTouch(View view, MotionEvent event) {
                                 //设置妹子显示的位置
-                                iconView.bitmapX = event.getX() - 36;
-                                iconView.bitmapY = event.getY() - 44;
-                                drawIcon(iconView);
+                                iconUtil.bitmapX = event.getX() - 36;
+                                iconUtil.bitmapY = event.getY() - 44;
+                                drawIcon(iconUtil);
                                 return true;
                             }
                         });
                     }
                     public void onFinish(){
-                        resetIcon(iconView);
-                        iconView.setOnTouchListener(null);
+                        resetIcon(iconUtil);
+                        iconUtil.setOnTouchListener(null);
                         cT.setText("End!");
                     }
                 }.start();
                 preventMoron();
             }
         });
-    frame.addView(iconView); // add a little cute icon on the screen, important!!!
+    frame.addView(iconUtil); // add a little cute icon on the screen, important!!!
     }
 
     @Override
@@ -307,55 +307,55 @@ public class Vex2016Activity extends Activity {
             alert.show();                    //显示对话框
         }
     }
-    public void drawIcon(IconView icon) {
+    public void drawIcon(IconUtil icon) {
         mapBoundary(icon);
         invalidateIcon(icon);
     }
-    public void mapBoundary(IconView iconView){
+    public void mapBoundary(IconUtil iconUtil){
         // For the next person trying to "optimize" this code, please increment the following counter for the
         // the next fool who doesn't read this:
         // HoursWasted = 42 hours;    ------ by Eddie, a little freshman who tried this!
         if(leftSide) {
-            if (iconView.bitmapX < 0) iconView.bitmapX = 0;
-            else if (iconView.bitmapX > 240) iconView.bitmapX = 240;
-            if (iconView.bitmapY < 0) iconView.bitmapY = 0;
-            else if (iconView.bitmapY > 520) iconView.bitmapY = 520;
+            if (iconUtil.bitmapX < 0) iconUtil.bitmapX = 0;
+            else if (iconUtil.bitmapX > 240) iconUtil.bitmapX = 240;
+            if (iconUtil.bitmapY < 0) iconUtil.bitmapY = 0;
+            else if (iconUtil.bitmapY > 520) iconUtil.bitmapY = 520;
         }
         else if(!leftSide) {
-            if (iconView.bitmapX < 295) iconView.bitmapX = 295;
-            else if (iconView.bitmapX > 530) iconView.bitmapX = 530;
-            if (iconView.bitmapY < 0) iconView.bitmapY = 0;
-            else if (iconView.bitmapY > 520) iconView.bitmapY = 520;
+            if (iconUtil.bitmapX < 295) iconUtil.bitmapX = 295;
+            else if (iconUtil.bitmapX > 530) iconUtil.bitmapX = 530;
+            if (iconUtil.bitmapY < 0) iconUtil.bitmapY = 0;
+            else if (iconUtil.bitmapY > 520) iconUtil.bitmapY = 520;
         }
     }
-    public void invalidateIcon(IconView iconView){
+    public void invalidateIcon(IconUtil iconUtil){
         //调用重绘方法
-        iconView.invalidate();
-        strCX = Float.toString(iconView.bitmapX);
-        strCY = Float.toString(iconView.bitmapY);
+        iconUtil.invalidate();
+        strCX = Float.toString(iconUtil.bitmapX);
+        strCY = Float.toString(iconUtil.bitmapY);
         cX.setText("x-axis: " + strCX);
         cY.setText("y-axis: " + strCY);
     }
-    public void resetIcon(IconView iconView) {
+    public void resetIcon(IconUtil iconUtil) {
         if(leftSide && up) {
-            iconView.bitmapX = 15;
-            iconView.bitmapY = 110;
-            invalidateIcon(iconView);
+            iconUtil.bitmapX = 15;
+            iconUtil.bitmapY = 110;
+            invalidateIcon(iconUtil);
         }
         else if(leftSide && !up){
-            iconView.bitmapX = 15;
-            iconView.bitmapY = 410;
-            invalidateIcon(iconView);
+            iconUtil.bitmapX = 15;
+            iconUtil.bitmapY = 410;
+            invalidateIcon(iconUtil);
         }
         else if(!leftSide && up){
-            iconView.bitmapX = 510;
-            iconView.bitmapY = 110;
-            invalidateIcon(iconView);
+            iconUtil.bitmapX = 510;
+            iconUtil.bitmapY = 110;
+            invalidateIcon(iconUtil);
         }
         else if(!leftSide && !up){
-            iconView.bitmapX = 510;
-            iconView.bitmapY = 410;
-            invalidateIcon(iconView);
+            iconUtil.bitmapX = 510;
+            iconUtil.bitmapY = 410;
+            invalidateIcon(iconUtil);
         }
     }
     // Driver mode score counters

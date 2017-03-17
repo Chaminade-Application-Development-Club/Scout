@@ -49,32 +49,59 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingTop="43dp">
-
-        <com.github.clans.fab.FloatingActionMenu
-            android:id="@+id/actionFAB"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"
-            app:menu_labels_position="right"
-            app:menu_icon="@android:drawable/ic_menu_send"
-            app:layout_anchor="@+id/include"
-            app:layout_anchorGravity="bottom|right"
-            android:layout_gravity="top|start"
-            app:menu_openDirection="down"
-            app:menu_backgroundColor= "@null">
-            <com.github.clans.fab.FloatingActionButton
-                android:id="@+id/fabNothing"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@mipmap/qr"
-                app:fab_size="mini"
-                app:fab_label="Generate QR Code" />
-        </com.github.clans.fab.FloatingActionMenu>
-
         <include layout="@layout/content_frc2017"
             android:id="@+id/include" />
+    </RelativeLayout>
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.github.clans.fab.FloatingActionButton
+            android:id="@+id/redGear"
+            android:src="@drawable/fab_add"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="255dp"
+            app:menu_colorPressed="#41d62d"
+            android:layout_marginStart="260dp">
+
+        </com.github.clans.fab.FloatingActionButton>
+
+        <com.github.clans.fab.FloatingActionButton
+            android:id="@+id/blueGear"
+            android:src="@drawable/fab_add"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="255dp"
+            app:menu_colorPressed="#41d62d"
+            android:layout_marginEnd="260dp">
+
+        </com.github.clans.fab.FloatingActionButton>
+
+        <com.github.clans.fab.FloatingActionButton
+            android:id="@+id/leftFuel"
+            android:src="@drawable/fab_add"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="80dp"
+            app:menu_colorNormal="#d5643205"
+            app:menu_colorPressed="#41d62d">
+        </com.github.clans.fab.FloatingActionButton>
+
+        <com.github.clans.fab.FloatingActionButton
+            android:id="@+id/rightFuel"
+            android:src="@drawable/fab_add"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="80dp"
+            app:menu_colorNormal="#d5643205"
+            app:menu_colorPressed="#41d62d">
+        </com.github.clans.fab.FloatingActionButton>
     </RelativeLayout>
 
     <com.github.clans.fab.FloatingActionMenu
@@ -91,6 +118,20 @@
         app:menu_fab_label="Create New Game"
         app:menu_openDirection="down"
         app:menu_backgroundColor="#9affffff">
+        <com.github.clans.fab.FloatingActionButton
+            android:id="@+id/fabReset"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_refresh_black_24dp"
+            app:fab_size="mini"
+            app:fab_label="Reset" />
+        <com.github.clans.fab.FloatingActionButton
+            android:id="@+id/fabEdit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_edit_black_24dp"
+            app:fab_size="mini"
+            app:fab_label="Edit Game Setting" />
         <com.github.clans.fab.FloatingActionButton
             android:id="@+id/fabGenerateQR"
             android:layout_width="wrap_content"

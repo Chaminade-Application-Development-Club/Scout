@@ -1,7 +1,8 @@
-package com.example.huzheyuan.scout.qRCode;
+package com.example.huzheyuan.scout.utilities;
 
 /**
  * Created by leo428 on 1/16/17.
+ * Credit for Eddie for doing nothing
  */
 import android.content.Context;
 
@@ -10,9 +11,7 @@ public class DensityUtils {
 
     /**
      * px与dp互相转换
-     * Created by yangle on 2016/4/12.
      */
-
 
     public static int dp2px(Context context, float dp) {
         //获取设备密度
