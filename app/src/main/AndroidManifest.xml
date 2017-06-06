@@ -22,6 +22,7 @@
             android:theme="@style/AppTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -44,9 +45,9 @@
         <activity
             android:name=".activities.Frc2017Activity"
             android:label="@string/title_activity_frc2017"
-            android:theme="@style/AppTheme.ActionBar.Transparent.NoActionBar"
-            android:screenOrientation="landscape">
-        </activity>
+            android:screenOrientation="landscape"
+            android:theme="@style/AppTheme.ActionBar.Transparent.NoActionBar"></activity>
+        <activity android:name=".activities.Vex2017Activity"></activity>
     </application>
 
 </manifest>
