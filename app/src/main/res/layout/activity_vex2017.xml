@@ -1,21 +1,87 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/super_frame"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.example.huzheyuan.scout.activities.Vex2017Activity">
-    <com.karonl.instance.InDoorView
-        android:id="@+id/vex_2017_Map"
-        android:layout_width="667dp"
-        android:layout_height="323dp"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginTop="8dp"
-        android:layout_marginRight="8dp"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        android:layout_marginBottom="8dp"
-        android:layout_marginLeft="8dp"
-        app:layout_constraintLeft_toLeftOf="parent" />
+    <android.support.v7.widget.Toolbar
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:layout_alignParentTop="true"
+        android:id="@+id/toolbar_vex_2017"
+        android:layout_marginBottom="0dp"
+        android:layout_marginEnd="0dp"
+        android:layout_marginLeft="0dp"
+        android:layout_marginRight="0dp"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="0dp"
+        android:background="?attr/colorPrimary"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme">
 
-</android.support.constraint.ConstraintLayout>
+        <TextView
+            android:id="@+id/txt_timer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="Please Start"
+            android:textColor="#FFFFFF" />
+    </android.support.v7.widget.Toolbar>
+
+    <com.github.clans.fab.FloatingActionMenu
+        android:id="@+id/multi_fam"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:menu_fab_size="mini"
+        app:menu_openDirection="down"
+        android:layout_alignParentEnd="true"
+        app:menu_fab_show_animation="@anim/fab_slide_in_from_left">
+    </com.github.clans.fab.FloatingActionMenu>
+
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/toolbar_vex_2017"
+        tools:layout_editor_absoluteY="55dp"
+        tools:layout_editor_absoluteX="0dp">
+
+        <include
+            android:id="@+id/include2"
+            layout="@layout/dashboard_layout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="7dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="7dp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginStart="8dp" />
+
+        <RelativeLayout
+            android:id="@+id/vex_2017_map_frame"
+            android:layout_width="0dp"
+            android:layout_height="400dp"
+            android:layout_marginLeft="8dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            android:layout_marginRight="8dp"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginBottom="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp">
+
+            <ImageView
+                android:id="@+id/img_vex_2017_map"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@mipmap/in_the_zone_map"
+                android:scaleType="fitCenter"/>
+        </RelativeLayout>
+    </android.support.constraint.ConstraintLayout>
+</RelativeLayout>

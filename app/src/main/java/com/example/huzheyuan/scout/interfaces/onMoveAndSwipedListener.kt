@@ -5,6 +5,6 @@ package com.example.huzheyuan.scout.interfaces
  */
 
 interface onMoveAndSwipedListener {
-    fun onItemMove(fromPosition: Int, toPosition: Int): Boolean
+    fun onItemMove(fromPosition: Int, toPosition: Int)
     fun onItemDismiss(position: Int)
 }
